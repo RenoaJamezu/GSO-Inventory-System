@@ -38,7 +38,7 @@ export default function Login() {
     if (!profile) {
       navigate("/create-profile");
     } else {
-      navigate("/dashboard");
+      navigate("/home");
     }
   };
 

@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { supabase } from "../utils/supabase";
+import { supabase } from "../../utils/supabase";
 
 export default function Sidebar() {
   const [loading, setLoading] = useState(false);
@@ -30,10 +30,10 @@ export default function Sidebar() {
     <aside className="flex min-h-screen w-full flex-col border-r border-white/60 bg-white/70 px-5 py-6 shadow-lg shadow-slate-900/5 backdrop-blur-xl">
       <div className="mb-8">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-600">
-          GSO Inventory
+          LGU Sibagat
         </p>
         <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
-          Sidebar
+          General Services Office
         </h2>
       </div>
 
@@ -61,6 +61,14 @@ export default function Sidebar() {
           }
         >
           Inventory
+        </NavLink>
+        <NavLink
+          to="/ppe/land"
+          className={({ isActive }) =>
+            `${baseClassName} ${isActive ? activeClassName : defaultClassName}`
+          }
+        >
+          Land
         </NavLink>
       </nav>
 

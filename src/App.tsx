@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Inventory from "./pages/Inventory";
+import Land from "./pages/inventory/Land";
 
 export default function App() {
   return (
@@ -21,6 +22,9 @@ export default function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/inventory" element={<Inventory />} />
+
+            {/* ppe routes */}
+            <Route path="/ppe/land" element={<Land />} />
           </Route>
         </Route>
       </Routes>
