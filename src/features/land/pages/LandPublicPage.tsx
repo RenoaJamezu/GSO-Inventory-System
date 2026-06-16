@@ -36,8 +36,8 @@ export default function LandPublicPage() {
     return (
       <div className="flex h-screen items-center justify-center">
         <div className="text-center">
-          <QRCode value={qrUrl} size={200} />
-          <p className="mt-4 text-sm">{qrUrl}</p>
+          <QRCode value={qrUrl} size={200} className="mx-auto" />
+          {/* <p className="mt-4 text-sm">{qrUrl}</p> */}
 
           <button
             onClick={() => window.print()}
@@ -56,12 +56,24 @@ export default function LandPublicPage() {
       <h1 className="text-xl font-bold">Land Information</h1>
 
       <div className="mt-4 space-y-2 border p-4 rounded">
-        <p><b>Lot No:</b> {land.lot_no}</p>
-        <p><b>Location:</b> {land.location}</p>
-        <p><b>Land:</b> {land.land}</p>
-        <p><b>Carrying Amount:</b> {land.carrying_amount}</p>
-        <p><b>Description:</b> {land.description}</p>
-        <p><b>Remarks:</b> {land.remarks}</p>
+        <p>
+          <b>Lot No:</b> {land.lot_no}
+        </p>
+        <p>
+          <b>Location:</b> {land.location}
+        </p>
+        <p>
+          <b>Land:</b> {land.land}
+        </p>
+        <p>
+          <b>Carrying Amount:</b> {land.carrying_amount}
+        </p>
+        <p>
+          <b>Description:</b> {land.description}
+        </p>
+        <p>
+          <b>Remarks:</b> {land.remarks}
+        </p>
       </div>
     </div>
   );
