@@ -1,6 +1,6 @@
 # GSO Inventory System
 
-Web-based inventory management application built with React, TypeScript, and Vite.
+Web-based inventory management application for LGU Sibagat General Services Office, built with React, TypeScript, and Vite.
 
 ## Tech Stack
 
@@ -9,7 +9,9 @@ Web-based inventory management application built with React, TypeScript, and Vit
 - Vite
 - React Router
 - Tailwind CSS
-- ESLint
+- Supabase (auth + database)
+- Zustand (state)
+- Zod (validation)
 
 ## Getting Started
 
@@ -17,6 +19,15 @@ Web-based inventory management application built with React, TypeScript, and Vit
 
 - Node.js 20+
 - npm 10+
+
+### Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
 ### Installation
 
@@ -34,36 +45,42 @@ The app will run at the local URL shown by Vite, usually `http://localhost:5173`
 
 ## Available Scripts
 
-- `npm run dev` - Start local development server.
-- `npm run build` - Type-check and create a production build.
-- `npm run preview` - Preview the production build locally.
-- `npm run lint` - Run ESLint checks.
+- `npm run dev` - Start local development server
+- `npm run build` - Type-check and create a production build
+- `npm run preview` - Preview the production build locally
+- `npm run lint` - Run ESLint checks
 
 ## Project Structure
 
 ```text
-.
-|- public/
-|- src/
-|  |- assets/
-|  |- App.tsx
-|  |- main.tsx
-|- index.html
-|- package.json
-|- vite.config.ts
+src/
+├── app/                  # App shell, providers, lazy routes
+├── layouts/              # AppLayout (sidebar + outlet)
+├── features/
+│   ├── auth/             # Login, profile, protected routes
+│   ├── land/             # PPE land inventory (CRUD)
+│   ├── home/
+│   ├── dashboard/
+│   └── inventory/
+└── shared/
+    ├── components/ui/    # Reusable UI (Table, Modal, PageHeader, etc.)
+    ├── config/           # Nav items, shared config
+    └── lib/              # Supabase client
 ```
 
 ## Current Status
 
-Starter UI is in place and ready for inventory module implementation.
+- Authentication with Supabase (login, profile setup)
+- Protected routes with lazy-loaded pages
+- Land PPE inventory module with full CRUD
+- Dashboard, Home, and Inventory pages (placeholder UI)
 
 ## Roadmap
 
-- Product catalog management
+- Additional PPE modules (buildings, equipment, etc.)
+- Role-based access control
+- Reporting dashboard with live metrics
 - Stock in/out tracking
-- Supplier management
-- Reporting dashboard
-- Authentication and role-based access
 
 ## License
 
