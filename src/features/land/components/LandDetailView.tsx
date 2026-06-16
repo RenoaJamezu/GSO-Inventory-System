@@ -1,5 +1,6 @@
 import DetailCard from "@/shared/components/ui/DetailCard";
 import type { LandItem } from "@/features/land/types/land.types";
+import QRCode from "react-qr-code";
 
 type LandDetailViewProps = {
   land: LandItem;
@@ -16,6 +17,11 @@ export default function LandDetailView({
   onEdit,
   onClose,
 }: LandDetailViewProps) {
+  const baseUrl = window.location.origin;
+
+  // THIS is what QR will open
+  const qrUrl = `${baseUrl}/land/${land.id}`;
+
   return (
     <div className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2">
@@ -30,29 +36,49 @@ export default function LandDetailView({
       <DetailCard label="Description" value={land.description} fullWidth />
       <DetailCard label="Remarks" value={land.remarks} fullWidth />
 
-      <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:justify-end">
-        <button
-          type="button"
-          onClick={onDelete}
-          disabled={isBusy}
-          className="rounded-2xl border border-rose-200 bg-rose-50 px-5 py-3 text-sm font-semibold text-rose-700 transition hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          Delete
-        </button>
-        <button
-          type="button"
-          onClick={onEdit}
-          className="rounded-2xl bg-sky-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-600/20 transition hover:bg-sky-700"
-        >
-          Edit
-        </button>
-        <button
-          type="button"
-          onClick={onClose}
-          className="rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-        >
-          Close
-        </button>
+      {/* ACTIONS */}
+      <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:justify-between">
+        {/* QR SECTION */}
+        <div className="flex flex-col gap-2">
+          <QRCode value={qrUrl} className="h-auto max-w-32" />
+
+          {/* PRINT BUTTON */}
+          <button
+            type="button"
+            onClick={() => window.open(`/land/${land.id}?print=true`, "_blank")}
+            className="rounded-xl bg-slate-900 px-3 py-2 text-xs text-white"
+          >
+            Print QR
+          </button>
+        </div>
+
+        {/* ACTION BUTTONS */}
+        <div className="flex flex-col items-baseline-last gap-3 sm:flex-row">
+          <button
+            type="button"
+            onClick={onDelete}
+            disabled={isBusy}
+            className="rounded-2xl border border-rose-200 bg-rose-50 px-5 py-3 text-sm font-semibold text-rose-700"
+          >
+            Delete
+          </button>
+
+          <button
+            type="button"
+            onClick={onEdit}
+            className="rounded-2xl bg-sky-600 px-5 py-3 text-sm font-semibold text-white"
+          >
+            Edit
+          </button>
+
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+@media print {
+  body {
+    background: white !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .print\:block {
+    display: block !important;
+  }
+}
+
 /* :root {
   --text: #6b6375;
   --text-h: #08060d;
