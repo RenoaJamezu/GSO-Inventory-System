@@ -44,7 +44,7 @@ export default function LandPage() {
               value={url}
               size={80}
               onDownload={() =>
-                downloadQrAsPng(String(row.id), url, String(row.location))
+                downloadQrAsPng(String(row.id), String(row.location))
               }
             />
 

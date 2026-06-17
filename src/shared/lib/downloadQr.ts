@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function downloadQrAsPng(id: string, value: string, location: string) {
+export async function downloadQrAsPng(id: string, location: string) {
   const svg = document.querySelector(`#qr-${id} svg`);
   if (!svg) return;
 
