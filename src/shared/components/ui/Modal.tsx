@@ -28,7 +28,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
         onClick={onClose}
       />
 
-      <div className="relative w-full max-w-3xl max-h-5/6 overflow-hidden overflow-y-auto rounded-3xl border border-white/60 bg-white p-6 shadow-2xl shadow-slate-950/20 sm:p-8">
+      <div className="relative w-full max-w-3xl max-h-5/6 overflow-hidden overflow-y-auto simple-scrollbar rounded-3xl border border-white/60 bg-white p-6 shadow-2xl shadow-slate-950/20 sm:p-8">
           {title && (
             <div className="mb-6 flex items-start justify-between gap-4">
               <div>

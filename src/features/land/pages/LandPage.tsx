@@ -11,8 +11,8 @@ export default function LandPage() {
   const { landItems, stats, loadError, modals, handlers } = useLandPage();
 
   return (
-    <div className="space-y-6">
-      <section className="rounded-4xl border border-white/70 bg-white/80 p-6 shadow-xl shadow-slate-900/5 backdrop-blur-xl sm:p-8">
+    <div className="flex min-h-0 flex-1 flex-col gap-6">
+      <section className="flex min-h-0 flex-1 flex-col rounded-4xl border border-white/70 bg-white/80 p-6 shadow-xl shadow-slate-900/5 backdrop-blur-xl sm:p-8">
         <PageHeader
           eyebrow="PPE inventory"
           title="Report on the Physical Count of Land"
@@ -39,7 +39,7 @@ export default function LandPage() {
           totalCarryingAmount={stats.totalCarryingAmount}
         />
 
-        <div className="mt-8">
+        <div className="mt-8 min-h-0 flex-1 overflow-y-auto simple-scrollbar pr-1">
           <Table
             columns={landColumns}
             data={landItems}
