@@ -84,7 +84,7 @@ export default function LandForm({
 
       <div className="grid gap-4 md:grid-cols-2">
         <FormField
-          label="Lot No"
+          label="ID NO / LOT NO"
           name="lot_no"
           value={form.lot_no}
           onChange={handleChange}
@@ -92,7 +92,7 @@ export default function LandForm({
         />
 
         <FormField
-          label="Location"
+          label="LOCATION"
           name="location"
           value={form.location}
           onChange={handleChange}
@@ -100,7 +100,7 @@ export default function LandForm({
         />
 
         <FormField
-          label="Land"
+          label="LAND"
           name="land"
           value={form.land}
           onChange={handleChange}
@@ -108,7 +108,7 @@ export default function LandForm({
         />
 
         <FormField
-          label="Land Improvements"
+          label="LAND IMPROVEMENTS"
           name="land_improvements"
           value={form.land_improvements}
           onChange={handleChange}
@@ -116,7 +116,7 @@ export default function LandForm({
         />
 
         <FormField
-          label="Carrying Amount"
+          label="CARRYING AMOUNT"
           name="carrying_amount"
           type="number"
           value={form.carrying_amount}
@@ -125,7 +125,7 @@ export default function LandForm({
         />
 
         <FormField
-          label="Land Title"
+          label="CONDITION / LAND TITLE"
           name="land_title"
           value={form.land_title}
           onChange={handleChange}
@@ -134,7 +134,7 @@ export default function LandForm({
       </div>
 
       <FormField
-        label="Description"
+        label="DESCRIPTION"
         name="description"
         textarea
         value={form.description}
@@ -143,7 +143,7 @@ export default function LandForm({
       />
 
       <FormField
-        label="Remarks"
+        label="REMARKS"
         name="remarks"
         textarea
         value={form.remarks}

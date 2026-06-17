@@ -6,9 +6,16 @@ import LandSummaryCards from "@/features/land/components/LandSummaryCards";
 import LandCreateModal from "@/features/land/components/LandCreateModal";
 import LandDetailModal from "@/features/land/components/LandDetailModal";
 import { useLandPage } from "@/features/land/hooks/useLandPage";
+import SearchInput from "@/shared/components/ui/SearchInput";
+import { useState } from "react";
 
 export default function LandPage() {
   const { landItems, stats, loadError, modals, handlers } = useLandPage();
+  const [search, setSearch] = useState("");
+
+  const filteredLandItems = landItems.filter((item) =>
+    item.location.toLowerCase().includes(search.toLowerCase()),
+  );
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-6">
@@ -39,10 +46,18 @@ export default function LandPage() {
           totalCarryingAmount={stats.totalCarryingAmount}
         />
 
+        <div className="mt-8">
+          <SearchInput
+            value={search}
+            onChange={setSearch}
+            placeholder="Search by location..."
+          />
+        </div>
+
         <div className="mt-8 min-h-0 flex-1 overflow-y-auto simple-scrollbar pr-1">
           <Table
             columns={landColumns}
-            data={landItems}
+            data={filteredLandItems}
             getRowKey={(row) => row.id}
             emptyMessage="No land records yet. Add the first entry using the button above."
             onRowClick={modals.setSelectedLand}
