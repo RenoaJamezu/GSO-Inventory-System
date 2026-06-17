@@ -60,16 +60,22 @@ export default function LandPublicPage() {
           <b>Lot No:</b> {land.lot_no}
         </p>
         <p>
+          <b>Land:</b> {land.land}
+        </p>
+        <p>
+          <b>Land Improvements:</b> {land.land_improvements}
+        </p>
+        <p>
           <b>Location:</b> {land.location}
         </p>
         <p>
-          <b>Land:</b> {land.land}
+          <b>Description:</b> {land.description}
         </p>
         <p>
           <b>Carrying Amount:</b> {land.carrying_amount}
         </p>
         <p>
-          <b>Description:</b> {land.description}
+          <b>Condition / Land Title:</b> {land.land_title}
         </p>
         <p>
           <b>Remarks:</b> {land.remarks}

@@ -1,7 +1,6 @@
 import { useLandPage } from "@/features/land/hooks/useLandPage";
 import PageHeader from "@/shared/components/ui/PageHeader";
 import SearchInput from "@/shared/components/ui/SearchInput";
-import SummaryCardProps from "@/shared/components/ui/SummaryCard";
 import Table from "@/shared/components/ui/Table";
 import { useState } from "react";
 import { ppeColumns } from "../components/ppeColumns";
@@ -13,7 +12,7 @@ export default function PpeSummaryPage() {
 
   const navigate = useNavigate();
 
-  const totalAmount = stats.totalCarryingAmount;
+  // const totalAmount = stats.totalCarryingAmount;
 
   const ppeData = [
     {
@@ -32,13 +31,6 @@ export default function PpeSummaryPage() {
         <PageHeader
           eyebrow="property plant and equipments"
           title="PPE Summary workspace"
-        />
-
-        <SummaryCardProps
-          totalDataLabel="total account title"
-          totalData={1}
-          totalAmountLabel="per inventory report"
-          totalAmount={totalAmount}
         />
 
         <div className="mt-8">

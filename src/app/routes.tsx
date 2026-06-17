@@ -15,7 +15,9 @@ const DashboardPage = lazy(
 const InventoryPage = lazy(
   () => import("@/features/inventory/pages/InventoryPage"),
 );
-const PpeSummaryPage = lazy(() => import("@/features/ppe_summary/pages/PpeSummaryPage"));
+const PpeSummaryPage = lazy(
+  () => import("@/features/ppe_summary/pages/PpeSummaryPage"),
+);
 const LandPage = lazy(() => import("@/features/land/pages/LandPage"));
 
 // NEW: public QR landing page (NO layout, NO auth)
