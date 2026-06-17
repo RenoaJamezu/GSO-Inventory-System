@@ -2,12 +2,12 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import Table from "@/shared/components/ui/Table";
 import PageHeader from "@/shared/components/ui/PageHeader";
 import { landColumns } from "@/features/land/components/landColumns";
-import LandSummaryCards from "@/features/land/components/LandSummaryCards";
 import LandCreateModal from "@/features/land/components/LandCreateModal";
 import LandDetailModal from "@/features/land/components/LandDetailModal";
 import { useLandPage } from "@/features/land/hooks/useLandPage";
 import SearchInput from "@/shared/components/ui/SearchInput";
 import { useState } from "react";
+import SummaryCardProps from "@/shared/components/ui/SummaryCard";
 
 export default function LandPage() {
   const { landItems, stats, loadError, modals, handlers } = useLandPage();
@@ -41,9 +41,11 @@ export default function LandPage() {
           </div>
         ) : null}
 
-        <LandSummaryCards
-          landCount={stats.landCount}
-          totalCarryingAmount={stats.totalCarryingAmount}
+        <SummaryCardProps
+          totalDataLabel="total land records"
+          totalData={stats.landCount}
+          totalAmountLabel="carrying amount"
+          totalAmount={stats.totalCarryingAmount}
         />
 
         <div className="mt-8">

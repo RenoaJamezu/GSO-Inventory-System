@@ -15,6 +15,7 @@ const DashboardPage = lazy(
 const InventoryPage = lazy(
   () => import("@/features/inventory/pages/InventoryPage"),
 );
+const PpeSummaryPage = lazy(() => import("@/features/ppe_summary/pages/PpeSummaryPage"));
 const LandPage = lazy(() => import("@/features/land/pages/LandPage"));
 
 // NEW: public QR landing page (NO layout, NO auth)
@@ -40,6 +41,7 @@ export default function AppRoutes() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/inventory" element={<InventoryPage />} />
+            <Route path="/ppe-summary" element={<PpeSummaryPage />} />
             <Route path="/ppe/land" element={<LandPage />} />
           </Route>
         </Route>
