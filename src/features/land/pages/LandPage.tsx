@@ -34,7 +34,11 @@ export default function LandPage() {
     { header: "LAND IMPROVEMENTS", key: "land_improvements" },
     { header: "LOCATION", key: "location" },
     { header: "DESCRIPTION", key: "description" },
-    { header: "CARRYING AMOUNT", key: "carrying_amount" },
+    {
+      header: "CARRYING AMOUNT",
+      key: "carrying_amount",
+      render: (value: number) => value.toLocaleString(),
+    },
     { header: "CONDITION / LAND TITLE", key: "land_title" },
     { header: "REMARKS", key: "remarks" },
 

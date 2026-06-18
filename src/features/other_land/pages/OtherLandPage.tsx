@@ -25,7 +25,7 @@ export default function OtherLandPage() {
     "carrying_amount",
     "date_acq",
     "remarks",
-  ])
+  ]);
 
   const columns = [
     { header: "No", key: "" },
@@ -33,7 +33,11 @@ export default function OtherLandPage() {
     { header: "LAND IMPROVEMENTS", key: "land_improvements" },
     { header: "LOCATION", key: "location" },
     { header: "DESCRIPTION", key: "description" },
-    { header: "CARRYING AMOUNT", key: "carrying_amount" },
+    {
+      header: "CARRYING AMOUNT",
+      key: "carrying_amount",
+      render: (value: number) => value.toLocaleString(),
+    },
     { header: "DATE ACQ", key: "date_acq" },
     { header: "REMARKS", key: "remarks" },
 
