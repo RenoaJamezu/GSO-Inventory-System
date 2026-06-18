@@ -8,6 +8,9 @@ export interface LandItem {
   carrying_amount: number;
   land_title: string;
   remarks: string;
+
+  group_id: number;
+  group_name: string;
 }
 
 export type LandInput = {
@@ -20,6 +23,8 @@ export type LandInput = {
   carrying_amount?: number | null;
   land_title?: string | null;
   remarks?: string | null;
+
+  group_id?: number | null;
 };
 
 export type LandActionResult<T = void> =

@@ -6,8 +6,12 @@ import {
 import { otherLandFields } from "@/features/other_land/config/otherLandFields";
 import FormRenderer from "@/shared/forms/FormRenderer";
 import { useZodForm } from "@/shared/forms/useZodForm";
+import GroupSelector from "@/shared/components/ui/GroupSelector";
+import { useAssetGroups } from "@/shared/hooks/useAssetGroups";
 
 const emptyForm: OtherLandFormData = {
+  group_id: null,
+
   land: "",
   land_improvements: "",
   location: "",
@@ -32,8 +36,13 @@ export default function OtherLandForm({
   serverError,
   onSubmit,
 }: Props) {
+  const { groups, addGroup, removeGroup } = useAssetGroups(
+    "other_land_improvement",
+  );
+
   const {
     form,
+    setForm,
     errors,
     submitting,
     setSubmitting,
@@ -77,6 +86,21 @@ export default function OtherLandForm({
         values={form}
         errors={errors}
         onChange={handleChange}
+      />
+
+      <GroupSelector
+        value={form.group_id}
+        groups={groups}
+        onChange={(value) =>
+          setForm((prev) => ({
+            ...prev,
+            group_id: value,
+          }))
+        }
+        onCreateGroup={async (name) => {
+          await addGroup(name);
+        }}
+        onDeleteGroup={removeGroup}
       />
 
       <div className="flex justify-end gap-3">

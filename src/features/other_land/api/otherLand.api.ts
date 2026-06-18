@@ -5,6 +5,10 @@ import type { OtherLandInput, OtherLandItem } from "../types/otherLand.types";
 function toOtherLandItem(item: any): OtherLandItem {
   return {
     id: Number(item.id),
+
+    group_id: item.group_id,
+    group_name: item.asset_groups?.name ?? null,
+
     land: item.land ?? "",
     land_improvements: item.land_improvements ?? "",
     location: item.location ?? "",
@@ -18,7 +22,15 @@ function toOtherLandItem(item: any): OtherLandItem {
 export async function fetchOtherLand(): Promise<OtherLandItem[]> {
   const { data, error } = await supabase
     .from("other_land_improvement")
-    .select("*")
+    .select(
+      `
+      *,
+      asset_groups (
+        id,
+        name
+      )
+    `,
+    )
     .is("deleted_at", null);
 
   if (error) throw new Error(error.message);
@@ -32,7 +44,15 @@ export async function createOtherLand(
   const { data, error } = await supabase
     .from("other_land_improvement")
     .insert(item)
-    .select("*")
+    .select(
+      `
+      *,
+      asset_groups (
+        id,
+        name
+      )
+    `,
+    )
     .single();
 
   if (error) throw new Error(error.message);
@@ -48,7 +68,15 @@ export async function updateOtherLand(
     .from("other_land_improvement")
     .update(item)
     .eq("id", id)
-    .select("*")
+    .select(
+      `
+      *,
+      asset_groups (
+        id,
+        name
+      )
+    `,
+    )
     .single();
 
   if (error) throw new Error(error.message);

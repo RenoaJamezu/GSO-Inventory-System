@@ -7,6 +7,9 @@ export interface OtherLandItem {
   carrying_amount: number;
   date_acq: string;
   remarks: string;
+
+  group_id: number;
+  group_name: string;
 }
 
 export type OtherLandInput = {
@@ -18,6 +21,8 @@ export type OtherLandInput = {
   carrying_amount?: number | null;
   date_acq?: string | null;
   remarks?: string | null;
+
+  group_id?: number | null;
 };
 
 export type OtherLandActionResult<T = void> =

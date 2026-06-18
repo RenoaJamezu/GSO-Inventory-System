@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
-
-import Table from "@/shared/components/ui/Table";
 import Modal from "@/shared/components/ui/Modal";
 import PageHeader from "@/shared/components/ui/PageHeader";
 import StatCard from "@/shared/components/ui/StatCard";
 import SearchInput from "@/shared/components/ui/SearchInput";
-
 import LandForm from "@/features/land/components/LandForm";
 import type { LandItem } from "@/features/land/types/land.types";
 import { useLandPage } from "@/features/land/hooks/useLandPage";
 import QrCard from "@/shared/components/ui/QrCard";
 import { downloadQrAsPng } from "@/shared/lib/downloadQr";
 import { searchItems } from "@/shared/lib/search";
+import GroupedTable from "@/shared/components/ui/GroupedTable";
 
 export default function LandPage() {
   const { landItems, stats, modals, handlers } = useLandPage();
@@ -115,10 +113,11 @@ export default function LandPage() {
       <SearchInput value={search} onChange={setSearch} />
 
       <div className="flex-1 overflow-y-auto simple-scrollbar">
-        <Table
+        <GroupedTable
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           columns={columns as any}
           data={filtered}
+          groupField="group_name"
           getRowKey={(r: LandItem) => r.id}
         />
       </div>

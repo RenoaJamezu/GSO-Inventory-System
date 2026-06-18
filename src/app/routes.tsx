@@ -24,7 +24,7 @@ const OtherLandPage = lazy(
 );
 
 // NEW: public QR landing page (NO layout, NO auth)
-const PublicAssetPage = lazy(() => import("@/shared/pages/PublicAssetPage"));
+const PublicAssetPage = lazy(() => import("@/features/public_asset/pages/PublicAssetPage"));
 
 export default function AppRoutes() {
   return (

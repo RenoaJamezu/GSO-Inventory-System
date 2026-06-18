@@ -21,7 +21,11 @@ export default function PpeSummaryPage() {
     { header: "NO", key: "id" },
     { header: "ACCOUNT TITLE", key: "account_title" },
     { header: "BOOK VALUE", key: "book_value" },
-    { header: "PER INVENTORY REPORT", key: "per_inventory_report" },
+    {
+      header: "PER INVENTORY REPORT",
+      key: "per_inventory_report",
+      render: (value: number) => value.toLocaleString(),
+    },
     { header: "VARIANCE", key: "variance" },
   ] as const;
 

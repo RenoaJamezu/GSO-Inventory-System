@@ -2,7 +2,6 @@ import Modal from "@/shared/components/ui/Modal";
 import PageHeader from "@/shared/components/ui/PageHeader";
 import SearchInput from "@/shared/components/ui/SearchInput";
 import StatCard from "@/shared/components/ui/StatCard";
-import Table from "@/shared/components/ui/Table";
 import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useOtherLandPage } from "../hooks/useOtherLandPage";
@@ -11,6 +10,7 @@ import OtherLandForm from "../components/OtherLandForm";
 import QrCard from "@/shared/components/ui/QrCard";
 import { downloadQrAsPng } from "@/shared/lib/downloadQr";
 import { searchItems } from "@/shared/lib/search";
+import GroupedTable from "@/shared/components/ui/GroupedTable";
 
 export default function OtherLandPage() {
   const { otherLandItems, stats, modals, handlers } = useOtherLandPage();
@@ -114,10 +114,11 @@ export default function OtherLandPage() {
       <SearchInput value={search} onChange={setSearch} />
 
       <div className="flex-1 overflow-y-auto simple-scrollbar">
-        <Table
+        <GroupedTable
+          data={filtered}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           columns={columns as any}
-          data={filtered}
+          groupField="group_name"
           getRowKey={(r: OtherLandItem) => r.id}
         />
       </div>

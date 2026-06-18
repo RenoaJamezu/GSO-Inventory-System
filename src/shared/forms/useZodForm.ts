@@ -17,12 +17,7 @@ export function useZodForm<T extends Record<string, unknown>>(
 
     setForm((prev) => ({
       ...prev,
-      [name]:
-        value === ""
-          ? null
-          : type === "number"
-            ? Number(value)
-            : value,
+      [name]: value === "" ? null : type === "number" ? Number(value) : value,
     }));
   };
 

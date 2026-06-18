@@ -10,6 +10,8 @@ export const otherLandSchema = z.object({
   carrying_amount: z.number().min(0, "Carrying amount must be 0 or greater"),
   date_acq: z.string().nullable().optional(),
   remarks: z.string().nullable().optional(),
+
+  group_id: z.number().nullable().optional(),
 });
 
 export type OtherLandFormData = z.infer<typeof otherLandSchema>;
