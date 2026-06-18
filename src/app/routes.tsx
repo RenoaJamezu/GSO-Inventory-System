@@ -19,11 +19,12 @@ const PpeSummaryPage = lazy(
   () => import("@/features/ppe_summary/pages/PpeSummaryPage"),
 );
 const LandPage = lazy(() => import("@/features/land/pages/LandPage"));
+const OtherLandPage = lazy(
+  () => import("@/features/other_land/pages/OtherLandPage"),
+);
 
 // NEW: public QR landing page (NO layout, NO auth)
-const LandPublicPage = lazy(
-  () => import("@/features/land/pages/LandPublicPage"),
-);
+const PublicAssetPage = lazy(() => import("@/shared/pages/PublicAssetPage"));
 
 export default function AppRoutes() {
   return (
@@ -33,7 +34,7 @@ export default function AppRoutes() {
         <Route path="/" element={<LoginPage />} />
 
         {/* PUBLIC QR ACCESS */}
-        <Route path="/land/:id" element={<LandPublicPage />} />
+        <Route path="/public/:entity/:id" element={<PublicAssetPage />} />
 
         {/* protected system */}
         <Route element={<ProtectedRoute />}>
@@ -45,6 +46,10 @@ export default function AppRoutes() {
             <Route path="/inventory" element={<InventoryPage />} />
             <Route path="/ppe-summary" element={<PpeSummaryPage />} />
             <Route path="/ppe/land" element={<LandPage />} />
+            <Route
+              path="/ppe/other-land-improvements"
+              element={<OtherLandPage />}
+            />
           </Route>
         </Route>
       </Routes>

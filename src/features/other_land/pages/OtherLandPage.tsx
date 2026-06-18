@@ -1,48 +1,47 @@
-import { useState } from "react";
-import { IoIosAddCircleOutline } from "react-icons/io";
-
-import Table from "@/shared/components/ui/Table";
 import Modal from "@/shared/components/ui/Modal";
 import PageHeader from "@/shared/components/ui/PageHeader";
-import StatCard from "@/shared/components/ui/StatCard";
 import SearchInput from "@/shared/components/ui/SearchInput";
-
-import LandForm from "@/features/land/components/LandForm";
-import type { LandItem } from "@/features/land/types/land.types";
-import { useLandPage } from "@/features/land/hooks/useLandPage";
+import StatCard from "@/shared/components/ui/StatCard";
+import Table from "@/shared/components/ui/Table";
+import { useState } from "react";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { useOtherLandPage } from "../hooks/useOtherLandPage";
+import type { OtherLandItem } from "../types/otherLand.types";
+import OtherLandForm from "../components/OtherLandForm";
 import QrCard from "@/shared/components/ui/QrCard";
 import { downloadQrAsPng } from "@/shared/lib/downloadQr";
 import { searchItems } from "@/shared/lib/search";
 
-export default function LandPage() {
-  const { landItems, stats, modals, handlers } = useLandPage();
+export default function OtherLandPage() {
+  const { otherLandItems, stats, modals, handlers } = useOtherLandPage();
   const [search, setSearch] = useState("");
 
-  const filtered = searchItems(landItems, search, [
-    "lot_no",
+  const filtered = searchItems(otherLandItems, search, [
+    "id",
     "land",
     "land_improvements",
     "location",
     "description",
-    "land_title",
+    "carrying_amount",
+    "date_acq",
     "remarks",
-  ]);
+  ])
 
   const columns = [
-    { header: "LOT NO", key: "lot_no" },
+    { header: "No", key: "" },
     { header: "LAND", key: "land" },
     { header: "LAND IMPROVEMENTS", key: "land_improvements" },
     { header: "LOCATION", key: "location" },
     { header: "DESCRIPTION", key: "description" },
     { header: "CARRYING AMOUNT", key: "carrying_amount" },
-    { header: "CONDITION / LAND TITLE", key: "land_title" },
+    { header: "DATE ACQ", key: "date_acq" },
     { header: "REMARKS", key: "remarks" },
 
     {
       header: "QR / ACTIONS",
       key: "id",
-      render: (_: unknown, row: LandItem) => {
-        const url = `${window.location.origin}/public/land/${row.id}`;
+      render: (_: unknown, row: OtherLandItem) => {
+        const url = `${window.location.origin}/public/other-land-improvement/${row.id}`;
 
         return (
           <div className="flex items-center gap-4" id={`qr-${row.id}`}>
@@ -51,7 +50,7 @@ export default function LandPage() {
               value={url}
               size={80}
               onDownload={() =>
-                downloadQrAsPng(String(row.id), String(row.land))
+                downloadQrAsPng(String(row.id), String(row.land_improvements))
               }
             />
 
@@ -59,7 +58,7 @@ export default function LandPage() {
             <div className="flex flex-col gap-2">
               <button
                 onClick={() => {
-                  modals.setSelectedLand(row);
+                  modals.setSelectedOtherLand(row);
                   modals.setIsEditing(true);
                 }}
                 className="rounded-lg bg-sky-600 px-3 py-1 text-xs text-white"
@@ -69,7 +68,7 @@ export default function LandPage() {
 
               <button
                 onClick={() => {
-                  modals.setSelectedLand(row);
+                  modals.setSelectedOtherLand(row);
                   handlers.handleDelete();
                 }}
                 className="rounded-lg bg-rose-600 px-3 py-1 text-xs text-white"
@@ -81,27 +80,27 @@ export default function LandPage() {
         );
       },
     },
-  ] as const;
+  ];
 
   return (
     <div className="flex flex-col gap-6 h-screen overflow-hidden">
       <PageHeader
         eyebrow="PPE Inventory"
-        title="Land Records"
-        description="Manage land assets and records"
+        title="Other Land Improvement Records"
+        description="Manage other land improvement assets and records"
         action={
           <button
             onClick={modals.openCreate}
             className="flex items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-white"
           >
             <IoIosAddCircleOutline />
-            Add Land
+            Add Other Land Improvement
           </button>
         }
       />
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <StatCard label="Total Records" value={stats.landCount} />
+        <StatCard label="Total Records" value={stats.otherLandCount} />
         <StatCard
           label="Total Amount"
           value={stats.totalCarryingAmount.toLocaleString()}
@@ -115,7 +114,7 @@ export default function LandPage() {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           columns={columns as any}
           data={filtered}
-          getRowKey={(r: LandItem) => r.id}
+          getRowKey={(r: OtherLandItem) => r.id}
         />
       </div>
 
@@ -125,7 +124,7 @@ export default function LandPage() {
         onClose={modals.closeCreate}
         title="Add Land"
       >
-        <LandForm
+        <OtherLandForm
           onClose={modals.closeCreate}
           onSubmit={handlers.handleCreate}
         />
@@ -133,13 +132,13 @@ export default function LandPage() {
 
       {/* EDIT MODAL ONLY */}
       <Modal
-        open={modals.isEditing && !!modals.selectedLand}
+        open={modals.isEditing && !!modals.selectedOtherLand}
         onClose={modals.closeDetail}
         title="Edit Land"
       >
-        {modals.selectedLand && (
-          <LandForm
-            initialData={modals.selectedLand}
+        {modals.selectedOtherLand && (
+          <OtherLandForm
+            initialData={modals.selectedOtherLand}
             onClose={modals.closeDetail}
             submitLabel="Save Changes"
             onSubmit={handlers.handleUpdate}

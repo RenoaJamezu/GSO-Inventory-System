@@ -1,32 +1,31 @@
 import { useEffect } from "react";
 import {
-  landSchema,
-  type LandFormData,
-} from "@/features/land/schemas/land.schema";
-import { landFields } from "@/features/land/config/landFields";
+  otherLandSchema,
+  type OtherLandFormData,
+} from "../schemas/otherLand.schema";
+import { otherLandFields } from "@/features/other_land/config/otherLandFields";
 import FormRenderer from "@/shared/forms/FormRenderer";
 import { useZodForm } from "@/shared/forms/useZodForm";
 
-const emptyForm: LandFormData = {
-  lot_no: "",
+const emptyForm: OtherLandFormData = {
   land: "",
   land_improvements: "",
   location: "",
   description: "",
   carrying_amount: 0,
-  land_title: "",
+  date_acq: "",
   remarks: "",
 };
 
 type Props = {
   onClose: () => void;
-  initialData?: LandFormData | null;
+  initialData?: OtherLandFormData | null;
   submitLabel?: string;
   serverError?: string | null;
-  onSubmit: (data: LandFormData) => Promise<boolean>;
+  onSubmit: (data: OtherLandFormData) => Promise<boolean>;
 };
 
-export default function LandForm({
+export default function OtherLandForm({
   onClose,
   initialData,
   submitLabel = "Save",
@@ -41,7 +40,7 @@ export default function LandForm({
     handleChange,
     validate,
     reset,
-  } = useZodForm<LandFormData>(initialData ?? emptyForm, landSchema);
+  } = useZodForm<OtherLandFormData>(initialData ?? emptyForm, otherLandSchema);
 
   useEffect(() => {
     reset(initialData ?? emptyForm);
@@ -74,7 +73,7 @@ export default function LandForm({
       )}
 
       <FormRenderer
-        fields={landFields}
+        fields={otherLandFields}
         values={form}
         errors={errors}
         onChange={handleChange}

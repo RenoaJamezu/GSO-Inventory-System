@@ -10,7 +10,10 @@ interface LandState {
   landItems: LandItem[];
   loadLand: () => Promise<LandActionResult>;
   addLand: (item: LandInput) => Promise<LandActionResult<LandItem>>;
-  updateLand: (id: number, item: LandInput) => Promise<LandActionResult<LandItem>>;
+  updateLand: (
+    id: number,
+    item: LandInput,
+  ) => Promise<LandActionResult<LandItem>>;
   deleteLand: (id: number) => Promise<LandActionResult>;
 }
 
@@ -47,12 +50,16 @@ export const useLandStore = create<LandState>((set) => ({
     try {
       const nextItem = await landApi.updateLand(id, item);
       set((state) => ({
-        landItems: state.landItems.map((row) => (row.id === id ? nextItem : row)),
+        landItems: state.landItems.map((row) =>
+          row.id === id ? nextItem : row,
+        ),
       }));
       return { success: true, data: nextItem };
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : "Failed to update land record.";
+        error instanceof Error
+          ? error.message
+          : "Failed to update land record.";
       console.error("Error updating land data:", message);
       return { success: false, error: message };
     }
@@ -67,7 +74,9 @@ export const useLandStore = create<LandState>((set) => ({
       return { success: true };
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : "Failed to delete land record.";
+        error instanceof Error
+          ? error.message
+          : "Failed to delete land record.";
       console.error("Error deleting land data:", message);
       return { success: false, error: message };
     }

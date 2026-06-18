@@ -21,14 +21,14 @@ const Table = <T extends object>({
 }: TableProps<T>) => {
   return (
     <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <div className="overflow-x-auto simple-scrollbar">
+      <div className="overflow-x-auto simple-scrollbar max-h-[400px] overflow-y-auto">
         <table className="min-w-full divide-y divide-slate-200">
           <thead className="bg-slate-50">
             <tr>
               {columns.map((column) => (
                 <th
                   key={String(column.key)}
-                  className="whitespace-nowrap px-5 py-4 text-left text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
+                  className="sticky top-0 z-10 bg-slate-50 whitespace-nowrap px-5 py-4 text-left text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
                 >
                   {column.header}
                 </th>
@@ -45,15 +45,6 @@ const Table = <T extends object>({
                     onRowClick ? "cursor-pointer" : ""
                   }`}
                   onClick={() => onRowClick?.(row)}
-                  onKeyDown={(event) => {
-                    if (!onRowClick) return;
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      onRowClick(row);
-                    }
-                  }}
-                  tabIndex={onRowClick ? 0 : undefined}
-                  role={onRowClick ? "button" : undefined}
                 >
                   {columns.map((column) => (
                     <td
@@ -61,7 +52,9 @@ const Table = <T extends object>({
                       className="whitespace-nowrap px-5 py-4 text-sm text-slate-700"
                     >
                       {(() => {
-                        const cellValue = row[column.key as keyof T] as T[keyof T];
+                        const cellValue = row[
+                          column.key as keyof T
+                        ] as T[keyof T];
 
                         return column.render
                           ? column.render(cellValue, row)

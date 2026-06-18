@@ -3,54 +3,76 @@ import PageHeader from "@/shared/components/ui/PageHeader";
 import SearchInput from "@/shared/components/ui/SearchInput";
 import Table from "@/shared/components/ui/Table";
 import { useState } from "react";
-import { ppeColumns } from "../components/ppeColumns";
 import { useNavigate } from "react-router-dom";
+import { useOtherLandPage } from "@/features/other_land/hooks/useOtherLandPage";
+import StatCard from "@/shared/components/ui/StatCard";
 
 export default function PpeSummaryPage() {
-  const { stats } = useLandPage();
+  const { stats: landStat } = useLandPage();
+  const { stats: otherLandStat } = useOtherLandPage();
   const [search, setSearch] = useState("");
 
   const navigate = useNavigate();
 
-  // const totalAmount = stats.totalCarryingAmount;
+  const totalAmount =
+    landStat.totalCarryingAmount + otherLandStat.totalCarryingAmount;
+
+  const columns = [
+    { header: "NO", key: "id" },
+    { header: "ACCOUNT TITLE", key: "account_title" },
+    { header: "BOOK VALUE", key: "book_value" },
+    { header: "PER INVENTORY REPORT", key: "per_inventory_report" },
+    { header: "VARIANCE", key: "variance" },
+  ] as const;
 
   const ppeData = [
     {
       id: 1,
       account_title: "Land",
       book_value: "",
-      per_inventory_report: stats.totalCarryingAmount,
+      per_inventory_report: landStat.totalCarryingAmount,
       variance: "",
       route: "/ppe/land",
+    },
+    {
+      id: 2,
+      account_title: "Other Land Improvements",
+      book_value: "",
+      per_inventory_report: otherLandStat.totalCarryingAmount,
+      variance: "",
+      route: "/ppe/other-land-improvements",
     },
   ];
 
   return (
     <div className="space-y-6">
-      <section className="rounded-4xl border border-white/70 bg-white/80 p-6 shadow-xl shadow-slate-900/5 backdrop-blur-xl sm:p-8">
-        <PageHeader
-          eyebrow="property plant and equipments"
-          title="PPE Summary workspace"
+      <PageHeader
+        eyebrow="property plant and equipments"
+        title="PPE Summary workspace"
+        description="View the summary of PPE records"
+      />
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <StatCard label="Total Records" value={2} />
+        <StatCard label="Total Amount" value={totalAmount.toLocaleString()} />
+      </div>
+
+      <SearchInput
+        value={search}
+        onChange={setSearch}
+        placeholder="Search by account title..."
+      />
+
+      <div className="flex-1 overflow-y-auto simple-scrollbar">
+        <Table
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          columns={columns as any}
+          data={ppeData}
+          getRowKey={(row) => row.id}
+          emptyMessage="No land records yet. Add the first entry using the button above."
+          onRowClick={(row) => navigate(row.route)}
         />
-
-        <div className="mt-8">
-          <SearchInput
-            value={search}
-            onChange={setSearch}
-            placeholder="Search by account title..."
-          />
-        </div>
-
-        <div className="mt-8 min-h-0 flex-1 overflow-y-auto simple-scrollbar pr-1">
-          <Table
-            columns={ppeColumns}
-            data={ppeData}
-            getRowKey={(row) => row.id}
-            emptyMessage="No land records yet. Add the first entry using the button above."
-            onRowClick={(row) => navigate(row.route)}
-          />
-        </div>
-      </section>
+      </div>
     </div>
   );
 }
