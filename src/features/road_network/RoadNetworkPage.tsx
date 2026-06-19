@@ -43,7 +43,7 @@ export default function RoadNetworkPage() {
       header: "QR / ACTIONS",
       key: "id",
       render: (_: unknown, row: RoadNetworkItem) => {
-        const url = `${window.location.origin}/public/land/${row.id}`;
+        const url = `${window.location.origin}/public/road-network/${row.id}`;
 
         return (
           <div className="flex items-center gap-4" id={`qr-${row.id}`}>

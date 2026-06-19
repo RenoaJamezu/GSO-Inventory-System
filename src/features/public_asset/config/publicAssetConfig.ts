@@ -23,8 +23,7 @@ export const publicAssetConfig: Record<string, PublicAssetConfig> = {
       {
         label: "Carrying Amount",
         key: "carrying_amount",
-        format: (value) =>
-          Number(value ?? 0).toLocaleString(),
+        format: (value) => Number(value ?? 0).toLocaleString(),
       },
       { label: "Condition / Land Title", key: "land_title" },
       { label: "Remarks", key: "remarks" },
@@ -42,10 +41,27 @@ export const publicAssetConfig: Record<string, PublicAssetConfig> = {
       {
         label: "Carrying Amount",
         key: "carrying_amount",
-        format: (value) =>
-          Number(value ?? 0).toLocaleString(),
+        format: (value) => Number(value ?? 0).toLocaleString(),
       },
       { label: "Date Acquired", key: "date_acq" },
+      { label: "Remarks", key: "remarks" },
+    ],
+  },
+  
+  "road-network": {
+    table: "road_network",
+    title: "Road Network Information",
+    fields: [
+      { label: "Station No", key: "station_no" },
+      { label: "Road Name", key: "road_name" },
+      { label: "Particulars", key: "particulars" },
+      { label: "Description", key: "description" },
+      {
+        label: "Cost",
+        key: "cost",
+        format: (value) => Number(value ?? 0).toLocaleString(),
+      },
+      { label: "Acquired Date", key: "acq_date" },
       { label: "Remarks", key: "remarks" },
     ],
   },
