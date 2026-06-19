@@ -1,61 +1,36 @@
-import { useLandPage } from "@/features/land/hooks/useLandPage";
+import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PageHeader from "@/shared/components/ui/PageHeader";
 import SearchInput from "@/shared/components/ui/SearchInput";
-import Table from "@/shared/components/ui/Table";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useOtherLandPage } from "@/features/other_land/useOtherLandPage";
+import Table, { type Column } from "@/shared/components/ui/Table";
 import StatCard from "@/shared/components/ui/StatCard";
-import { useRoadNetworkPage } from "@/features/road_network/useRoadNetworkPage";
+import { usePpeSummary } from "@/shared/ppe/usePpeSummary";
+import type { PpeSummaryRow } from "@/shared/ppe/types";
 
 export default function PpeSummaryPage() {
-  const { stats: landStat } = useLandPage();
-  const { stats: otherLandStat } = useOtherLandPage();
-  const { stats: roadNetworkStat} = useRoadNetworkPage();
+  const { summaryRows, totalAmount } = usePpeSummary();
   const [search, setSearch] = useState("");
-
   const navigate = useNavigate();
 
-  const totalAmount =
-    landStat.totalCarryingAmount + otherLandStat.totalCarryingAmount + roadNetworkStat.totalCost;
+  const filteredRows = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    if (!query) return summaryRows;
 
-  const columns = [
+    return summaryRows.filter((row) =>
+      row.account_title.toLowerCase().includes(query),
+    );
+  }, [search, summaryRows]);
+
+  const columns: Column<PpeSummaryRow>[] = [
     { header: "NO", key: "id" },
     { header: "ACCOUNT TITLE", key: "account_title" },
     { header: "BOOK VALUE", key: "book_value" },
     {
       header: "PER INVENTORY REPORT",
       key: "per_inventory_report",
-      render: (value: number) => value.toLocaleString(),
+      render: (value) => Number(value).toLocaleString(),
     },
     { header: "VARIANCE", key: "variance" },
-  ] as const;
-
-  const ppeData = [
-    {
-      id: 1,
-      account_title: "Land",
-      book_value: "",
-      per_inventory_report: landStat.totalCarryingAmount,
-      variance: "",
-      route: "/ppe/land",
-    },
-    {
-      id: 2,
-      account_title: "Other Land Improvements",
-      book_value: "",
-      per_inventory_report: otherLandStat.totalCarryingAmount,
-      variance: "",
-      route: "/ppe/other-land-improvement",
-    },
-    {
-      id: 3,
-      account_title: "Road Networks",
-      book_value: "",
-      per_inventory_report: roadNetworkStat.totalCost,
-      variance: "",
-      route: "/ppe/road-network",
-    },
   ];
 
   return (
@@ -67,7 +42,7 @@ export default function PpeSummaryPage() {
       />
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <StatCard label="Total Records" value={2} />
+        <StatCard label="Total Account Title" value={summaryRows.length} />
         <StatCard label="Total Amount" value={totalAmount.toLocaleString()} />
       </div>
 
@@ -77,14 +52,16 @@ export default function PpeSummaryPage() {
         placeholder="Search by account title..."
       />
 
-      <div className="flex-1 overflow-y-auto simple-scrollbar">
-        <Table
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          columns={columns as any}
-          data={ppeData}
+      <div className="simple-scrollbar flex-1 overflow-y-auto">
+        <Table<PpeSummaryRow>
+          columns={columns}
+          data={filteredRows}
           getRowKey={(row) => row.id}
-          emptyMessage="No land records yet. Add the first entry using the button above."
-          onRowClick={(row) => navigate(row.route)}
+          emptyMessage="No PPE records yet."
+          onRowClick={(row) => {
+            console.log(row.route);
+            navigate(row.route);
+          }}
         />
       </div>
     </div>

@@ -20,8 +20,8 @@ const Table = <T extends object>({
   emptyMessage = "No records yet.",
 }: TableProps<T>) => {
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <div className="overflow-x-auto simple-scrollbar max-h-[400px] overflow-y-auto">
+    <div className="flex h-full flex-col rounded-3xl border border-slate-200 bg-white shadow-sm">
+      <div className="simple-scrollbar min-h-0 flex-1 overflow-auto">
         <table className="min-w-full divide-y divide-slate-200">
           <thead className="bg-slate-50">
             <tr>
@@ -49,7 +49,7 @@ const Table = <T extends object>({
                   {columns.map((column) => (
                     <td
                       key={String(column.key)}
-                      className="whitespace-nowrap px-5 py-4 text-sm text-slate-700"
+                      className="whitespace-nowrap px-5 py-4 text-sm text-slate-700 capitalize"
                     >
                       {(() => {
                         const cellValue = row[

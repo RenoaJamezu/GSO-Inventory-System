@@ -1,7 +1,9 @@
 import PageHeader from "@/shared/components/ui/PageHeader";
 import StatCard from "@/shared/components/ui/StatCard";
+import { usePpeSummary } from "@/shared/ppe/usePpeSummary";
 
 export default function DashboardPage() {
+  const { totalRecords } = usePpeSummary();
   return (
     <section className="grid gap-6 lg:grid-cols-[1.6fr_0.9fr]">
       <div className="rounded-4xl border border-white/70 bg-white/80 p-6 shadow-xl shadow-slate-900/5 backdrop-blur-xl sm:p-8">
@@ -12,7 +14,7 @@ export default function DashboardPage() {
         />
 
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
-          <StatCard label="Inventory" value="128" hint="tracked items" />
+          <StatCard label="Inventory" value={totalRecords} hint="tracked items" />
           <StatCard label="Alerts" value="04" hint="need attention" />
           <StatCard label="Activity" value="18" hint="updates today" />
         </div>

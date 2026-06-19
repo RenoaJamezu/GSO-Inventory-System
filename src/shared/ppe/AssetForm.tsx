@@ -1,41 +1,35 @@
 import { useEffect } from "react";
-import { otherLandSchema, type OtherLandFormData } from "./otherLand.schema";
-import { otherLandFields } from "@/features/other_land/otherLandFields";
-import FormRenderer from "@/shared/forms/FormRenderer";
 import { useZodForm } from "@/shared/forms/useZodForm";
 import GroupSelector from "@/shared/components/ui/GroupSelector";
 import { useAssetGroups } from "@/shared/hooks/useAssetGroups";
+import type { BaseAssetItem } from "./types";
+import type { PpeModule } from "./createPpeModule";
+import { FormField } from "../components/ui/FormField";
 
-const emptyForm: OtherLandFormData = {
-  group_id: null,
-
-  land: "",
-  land_improvements: "",
-  location: "",
-  description: "",
-  carrying_amount: 0,
-  date_acq: "",
-  remarks: "",
-};
-
-type Props = {
+type Props<
+  TItem extends BaseAssetItem,
+  TFormData extends Record<string, unknown>,
+> = {
+  module: PpeModule<TItem, TFormData>;
   onClose: () => void;
-  initialData?: OtherLandFormData | null;
+  initialData?: TFormData | null;
   submitLabel?: string;
   serverError?: string | null;
-  onSubmit: (data: OtherLandFormData) => Promise<boolean>;
+  onSubmit: (data: TFormData) => Promise<boolean>;
 };
 
-export default function OtherLandForm({
+export default function AssetForm<
+  TItem extends BaseAssetItem,
+  TFormData extends Record<string, unknown>,
+>({
+  module,
   onClose,
   initialData,
   submitLabel = "Save",
   serverError,
   onSubmit,
-}: Props) {
-  const { groups, addGroup, removeGroup } = useAssetGroups(
-    "other_land_improvement",
-  );
+}: Props<TItem, TFormData>) {
+  const { groups, addGroup, removeGroup } = useAssetGroups(module.moduleKey);
 
   const {
     form,
@@ -46,11 +40,11 @@ export default function OtherLandForm({
     handleChange,
     validate,
     reset,
-  } = useZodForm<OtherLandFormData>(initialData ?? emptyForm, otherLandSchema);
+  } = useZodForm<TFormData>(initialData ?? module.emptyForm, module.schema);
 
   useEffect(() => {
-    reset(initialData ?? emptyForm);
-  }, [initialData]);
+    reset(initialData ?? module.emptyForm);
+  }, [initialData, module.emptyForm, reset]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,13 +53,11 @@ export default function OtherLandForm({
     if (!validated) return;
 
     setSubmitting(true);
-
     const success = await onSubmit(validated);
-
     setSubmitting(false);
 
     if (success) {
-      reset(initialData ?? emptyForm);
+      reset(initialData ?? module.emptyForm);
       onClose();
     }
   };
@@ -78,15 +70,21 @@ export default function OtherLandForm({
         </div>
       )}
 
-      <FormRenderer
-        fields={otherLandFields}
-        values={form}
-        errors={errors}
-        onChange={handleChange}
-      />
+      {module.fields.map((field) => (
+        <FormField
+          key={field.name}
+          label={field.label}
+          name={field.name}
+          type={field.type}
+          textarea={field.textarea}
+          value={form[field.name] as string | number | null | undefined}
+          onChange={handleChange}
+          error={errors[field.name]}
+        />
+      ))}
 
       <GroupSelector
-        value={form.group_id}
+        value={form.group_id as number | null}
         groups={groups}
         onChange={(value) =>
           setForm((prev) => ({

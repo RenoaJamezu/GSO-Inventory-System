@@ -19,7 +19,7 @@ export function FormField({
 }: FormFieldProps) {
   return (
     <div className="space-y-1.5">
-      <label className="text-sm font-semibold text-slate-700">{label}</label>
+      <label className="text-sm font-semibold text-slate-700 uppercase">{label}</label>
 
       {textarea ? (
         <textarea

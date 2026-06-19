@@ -18,14 +18,19 @@ const InventoryPage = lazy(
 const PpeSummaryPage = lazy(
   () => import("@/features/ppe_summary/pages/PpeSummaryPage"),
 );
-const LandPage = lazy(() => import("@/features/land/pages/LandPage"));
-const OtherLandPage = lazy(
-  () => import("@/features/other_land/OtherLandPage"),
+const LandPage = lazy(() => import("@/features/ppe/pages/LandPage"));
+const OtherLandPage = lazy(() => import("@/features/ppe/pages/OtherLandPage"));
+const RoadNetworkPage = lazy(
+  () => import("@/features/ppe/pages/RoadNetworkPage"),
 );
-const RoadNetworkPage = lazy(() => import("@/features/road_network/RoadNetworkPage"))
+const FloodControlPage = lazy(
+  () => import("@/features/ppe/pages/FloodControlPage"),
+);
 
 // NEW: public QR landing page (NO layout, NO auth)
-const PublicAssetPage = lazy(() => import("@/features/public_asset/pages/PublicAssetPage"));
+const PublicAssetPage = lazy(
+  () => import("@/features/public_asset/pages/PublicAssetPage"),
+);
 
 export default function AppRoutes() {
   return (
@@ -52,6 +57,7 @@ export default function AppRoutes() {
               element={<OtherLandPage />}
             />
             <Route path="/ppe/road-network" element={<RoadNetworkPage />} />
+            <Route path="/ppe/flood-control" element={<FloodControlPage />} />
           </Route>
         </Route>
       </Routes>

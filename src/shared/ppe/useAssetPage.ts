@@ -1,42 +1,45 @@
 import { useEffect, useState } from "react";
-import { useLandStore } from "@/features/land/store/landStore";
-import type { LandItem } from "@/features/land/types/land.types";
-import type { LandFormData } from "@/features/land/schemas/land.schema";
+import type { BaseAssetItem } from "./types";
+import type { PpeModule } from "./createPpeModule";
 
-export function useLandPage() {
+export function useAssetPage<
+  TItem extends BaseAssetItem,
+  TFormData extends Record<string, unknown>,
+>(module: PpeModule<TItem, TFormData>) {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [selectedLand, setSelectedLand] = useState<LandItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<TItem | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [isBusy, setIsBusy] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
   const [editError, setEditError] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
 
-  const landItems = useLandStore((state) => state.landItems);
-  const loadLand = useLandStore((state) => state.loadLand);
-  const addLand = useLandStore((state) => state.addLand);
-  const updateLand = useLandStore((state) => state.updateLand);
-  const deleteLand = useLandStore((state) => state.deleteLand);
+  const items = module.useStore((state) => state.items);
+  const load = module.useStore((state) => state.load);
+  const add = module.useStore((state) => state.add);
+  const update = module.useStore((state) => state.update);
+  const remove = module.useStore((state) => state.remove);
 
   useEffect(() => {
-    const load = async () => {
-      const result = await loadLand();
+    const runLoad = async () => {
+      const result = await load();
       if (!result.success) {
         setLoadError(result.error);
       }
     };
 
-    load();
-  }, [loadLand]);
+    void runLoad();
+  }, [load]);
 
-  const landCount = landItems.length;
-  const totalCarryingAmount = landItems.reduce(
-    (sum, item) => sum + Number(item.carrying_amount || 0),
-    0
+  const itemCount = items.length;
+  const totalAmount = items.reduce(
+    (sum: number, item: TItem) =>
+      sum + Number(item[module.amountField] ?? 0),
+    0,
   );
 
   const closeDetail = () => {
-    setSelectedLand(null);
+    setSelectedItem(null);
     setIsEditing(false);
     setIsBusy(false);
     setEditError(null);
@@ -52,8 +55,8 @@ export function useLandPage() {
     setCreateError(null);
   };
 
-  const handleCreate = async (data: LandFormData): Promise<boolean> => {
-    const result = await addLand(data);
+  const handleCreate = async (data: TFormData): Promise<boolean> => {
+    const result = await add(data);
     if (!result.success) {
       setCreateError(result.error);
       return false;
@@ -62,11 +65,11 @@ export function useLandPage() {
     return true;
   };
 
-  const handleUpdate = async (data: LandFormData): Promise<boolean> => {
-    if (!selectedLand) return false;
+  const handleUpdate = async (data: TFormData): Promise<boolean> => {
+    if (!selectedItem) return false;
 
     setIsBusy(true);
-    const result = await updateLand(selectedLand.id, data);
+    const result = await update(selectedItem.id, data);
     setIsBusy(false);
 
     if (!result.success) {
@@ -79,16 +82,17 @@ export function useLandPage() {
   };
 
   const handleDelete = async () => {
-    if (!selectedLand) return;
+    if (!selectedItem) return;
 
+    const label = String(selectedItem[module.deleteConfirmField] || "this item");
     const confirmed = window.confirm(
-      `Delete land record for ${selectedLand.lot_no || "this item"}?`
+      `Delete ${module.labels.singular.toLowerCase()} record for ${label}?`,
     );
 
     if (!confirmed) return;
 
     setIsBusy(true);
-    const result = await deleteLand(selectedLand.id);
+    const result = await remove(selectedItem.id);
     setIsBusy(false);
 
     if (result.success) {
@@ -99,19 +103,19 @@ export function useLandPage() {
   };
 
   return {
-    landItems,
-    stats: { landCount, totalCarryingAmount },
+    items,
+    stats: { itemCount, totalAmount },
     loadError,
     modals: {
       isCreateOpen,
       openCreate,
       closeCreate,
       createError,
-      selectedLand,
+      selectedItem,
       isEditing,
       isBusy,
       editError,
-      setSelectedLand,
+      setSelectedItem,
       setIsEditing,
       closeDetail,
     },

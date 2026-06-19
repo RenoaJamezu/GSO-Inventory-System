@@ -19,11 +19,11 @@ export default function PageHeader({
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-600">
           {eyebrow}
         </p>
-        <h1 className="text-3xl font-semibold tracking-tight text-slate-900">
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-900 capitalize">
           {title}
         </h1>
         {description ? (
-          <p className="max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
+          <p className="max-w-2xl text-sm leading-6 text-slate-600 sm:text-base first-letter:capitalize">
             {description}
           </p>
         ) : null}
