@@ -20,7 +20,7 @@ const PpeSummaryPage = lazy(
 );
 const LandPage = lazy(() => import("@/features/land/pages/LandPage"));
 const OtherLandPage = lazy(
-  () => import("@/features/other_land/pages/OtherLandPage"),
+  () => import("@/features/other_land/OtherLandPage"),
 );
 const RoadNetworkPage = lazy(() => import("@/features/road_network/RoadNetworkPage"))
 
