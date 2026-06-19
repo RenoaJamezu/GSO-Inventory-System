@@ -1,8 +1,5 @@
 import { useEffect } from "react";
-import {
-  otherLandSchema,
-  type OtherLandFormData,
-} from "../otherLand.schema";
+import { otherLandSchema, type OtherLandFormData } from "./otherLand.schema";
 import { otherLandFields } from "@/features/other_land/otherLandFields";
 import FormRenderer from "@/shared/forms/FormRenderer";
 import { useZodForm } from "@/shared/forms/useZodForm";

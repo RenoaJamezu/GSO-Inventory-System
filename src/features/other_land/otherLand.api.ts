@@ -1,5 +1,5 @@
 import { supabase } from "@/shared/lib/supabase";
-import type { OtherLandInput, OtherLandItem } from "../otherLand.types";
+import type { OtherLandInput, OtherLandItem } from "./otherLand.types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function toOtherLandItem(item: any): OtherLandItem {

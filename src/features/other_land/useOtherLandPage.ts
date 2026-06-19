@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import type { OtherLandItem } from "../otherLand.types";
-import { useOtherLandStore } from "../otherLandStore";
-import type { OtherLandFormData } from "../otherLand.schema";
+import type { OtherLandItem } from "./otherLand.types";
+import { useOtherLandStore } from "./otherLandStore";
+import type { OtherLandFormData } from "./otherLand.schema";
 
 export function useOtherLandPage() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);

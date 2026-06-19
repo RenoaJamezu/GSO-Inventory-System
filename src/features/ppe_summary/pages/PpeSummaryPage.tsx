@@ -4,7 +4,7 @@ import SearchInput from "@/shared/components/ui/SearchInput";
 import Table from "@/shared/components/ui/Table";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useOtherLandPage } from "@/features/other_land/hooks/useOtherLandPage";
+import { useOtherLandPage } from "@/features/other_land/useOtherLandPage";
 import StatCard from "@/shared/components/ui/StatCard";
 import { useRoadNetworkPage } from "@/features/road_network/useRoadNetworkPage";
 

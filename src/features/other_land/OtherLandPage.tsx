@@ -4,13 +4,13 @@ import SearchInput from "@/shared/components/ui/SearchInput";
 import StatCard from "@/shared/components/ui/StatCard";
 import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { useOtherLandPage } from "../hooks/useOtherLandPage";
-import type { OtherLandItem } from "../otherLand.types";
-import OtherLandForm from "../components/OtherLandForm";
 import QrCard from "@/shared/components/ui/QrCard";
 import { downloadQrAsPng } from "@/shared/lib/downloadQr";
 import { searchItems } from "@/shared/lib/search";
 import GroupedTable from "@/shared/components/ui/GroupedTable";
+import { useOtherLandPage } from "./useOtherLandPage";
+import type { OtherLandItem } from "./otherLand.types";
+import OtherLandForm from "./OtherLandForm";
 
 export default function OtherLandPage() {
   const { otherLandItems, stats, modals, handlers } = useOtherLandPage();
