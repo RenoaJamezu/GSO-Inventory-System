@@ -5,7 +5,7 @@ import StatCard from "@/shared/components/ui/StatCard";
 import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useOtherLandPage } from "../hooks/useOtherLandPage";
-import type { OtherLandItem } from "../types/otherLand.types";
+import type { OtherLandItem } from "../otherLand.types";
 import OtherLandForm from "../components/OtherLandForm";
 import QrCard from "@/shared/components/ui/QrCard";
 import { downloadQrAsPng } from "@/shared/lib/downloadQr";

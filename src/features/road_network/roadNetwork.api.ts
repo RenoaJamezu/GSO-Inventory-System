@@ -1,54 +1,53 @@
 import { supabase } from "@/shared/lib/supabase";
-import type { LandInput, LandItem } from "@/features/land/types/land.types";
+import type { RoadNetworkInput, RoadNetworkItem } from "./roadNetwork.type";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function toLandItem(item: any): LandItem {
+function toRoadNetworkItem(item: any): RoadNetworkItem {
   return {
     id: Number(item.id),
 
     group_id: item.group_id,
     group_name: item.asset_groups?.name ?? null,
 
-    lot_no: item.lot_no ?? "",
-    land: item.land ?? "",
-    land_improvements: item.land_improvements ?? "",
-    location: item.location ?? "",
+    station_no: item.station_no ?? "",
+    road_name: item.road_name ?? "",
+    particulars: item.particulars ?? "",
     description: item.description ?? "",
-    carrying_amount: Number(item.carrying_amount ?? 0),
-    land_title: item.land_title ?? "",
+    cost: Number(item.cost ?? 0),
+    acq_date: item.acq_date ?? "",
     remarks: item.remarks ?? "",
   };
 }
 
-export async function fetchLand(): Promise<LandItem[]> {
+export async function fetchRoadNetwork(): Promise<RoadNetworkItem[]> {
   const { data, error } = await supabase
-    .from("land")
+    .from("road_network")
     .select(`*, asset_groups ( id, name )`)
     .is("deleted_at", null);
 
   if (error) throw new Error(error.message);
 
-  return (data ?? []).map(toLandItem);
+  return (data ?? []).map(toRoadNetworkItem);
 }
 
-export async function createLand(item: LandInput): Promise<LandItem> {
+export async function createRoadNetwork(item: RoadNetworkInput): Promise<RoadNetworkItem> {
   const { data, error } = await supabase
-    .from("land")
+    .from("road_network")
     .insert(item)
     .select(`*, asset_groups ( id, name )`)
     .single();
 
   if (error) throw new Error(error.message);
 
-  return toLandItem(data);
+  return toRoadNetworkItem(data);
 }
 
-export async function updateLand(
+export async function updateRoadNetwork(
   id: number,
-  item: LandInput,
-): Promise<LandItem> {
+  item: RoadNetworkInput,
+): Promise<RoadNetworkItem> {
   const { data, error } = await supabase
-    .from("land")
+    .from("road_network")
     .update(item)
     .eq("id", id)
     .select(`*, asset_groups ( id, name )`)
@@ -56,12 +55,12 @@ export async function updateLand(
 
   if (error) throw new Error(error.message);
 
-  return toLandItem(data);
+  return toRoadNetworkItem(data);
 }
 
-export async function deleteLand(id: number): Promise<void> {
+export async function deleteRoadNetwork(id: number): Promise<void> {
   const { error } = await supabase
-    .from("land")
+    .from("road_network")
     .update({ deleted_at: new Date().toISOString() })
     .eq("id", id);
 

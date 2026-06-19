@@ -1,5 +1,5 @@
 import { supabase } from "@/shared/lib/supabase";
-import type { OtherLandInput, OtherLandItem } from "../types/otherLand.types";
+import type { OtherLandInput, OtherLandItem } from "../otherLand.types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function toOtherLandItem(item: any): OtherLandItem {
@@ -22,15 +22,7 @@ function toOtherLandItem(item: any): OtherLandItem {
 export async function fetchOtherLand(): Promise<OtherLandItem[]> {
   const { data, error } = await supabase
     .from("other_land_improvement")
-    .select(
-      `
-      *,
-      asset_groups (
-        id,
-        name
-      )
-    `,
-    )
+    .select(`*, asset_groups ( id, name )`)
     .is("deleted_at", null);
 
   if (error) throw new Error(error.message);
@@ -44,15 +36,7 @@ export async function createOtherLand(
   const { data, error } = await supabase
     .from("other_land_improvement")
     .insert(item)
-    .select(
-      `
-      *,
-      asset_groups (
-        id,
-        name
-      )
-    `,
-    )
+    .select(`*, asset_groups ( id, name )`)
     .single();
 
   if (error) throw new Error(error.message);
@@ -68,15 +52,7 @@ export async function updateOtherLand(
     .from("other_land_improvement")
     .update(item)
     .eq("id", id)
-    .select(
-      `
-      *,
-      asset_groups (
-        id,
-        name
-      )
-    `,
-    )
+    .select(`*, asset_groups ( id, name )`)
     .single();
 
   if (error) throw new Error(error.message);

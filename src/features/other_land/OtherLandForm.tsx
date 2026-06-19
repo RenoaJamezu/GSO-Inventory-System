@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import {
   otherLandSchema,
   type OtherLandFormData,
-} from "../schemas/otherLand.schema";
-import { otherLandFields } from "@/features/other_land/config/otherLandFields";
+} from "../otherLand.schema";
+import { otherLandFields } from "@/features/other_land/otherLandFields";
 import FormRenderer from "@/shared/forms/FormRenderer";
 import { useZodForm } from "@/shared/forms/useZodForm";
 import GroupSelector from "@/shared/components/ui/GroupSelector";

@@ -5,4 +5,33 @@ export const GROUP_MODULE_MAP = {
   flood_control_system: "flood_control_system",
   water_supply_system: "water_supply_system",
   power_supply_system: "power_supply_system",
+  park_plazas_and_monument: "park_plazas_and_monument",
+  buildings: "buildings",
+  other_structure: "other_structure",
+  hospital_and_health_center: "hospital_and_health_center",
+  markets: "markets",
+  other_infrastructure_asset: "other_infrastructure_asset",
+  construction_in_progress_infrastructure_asset:
+    "construction_in_progress_infrastructure_asset",
+  construction_in_progress_building_and_other_structure:
+    "construction_in_progress_building_and_other_structure",
+  office_equipment: "office_equipment",
+  furniture_and_fixtures: "furniture_and_fixtures",
+  information_technology_equipment: "information_technology_equipment",
+  agricultural_and_forestry_equipment: "agricultural_and_forestry_equipment",
+  communication_equipment: "communication_equipment",
+  construction_and_heavy_equipment: "construction_and_heavy_equipment",
+  disaster_and_rescue_equipment: "disaster_and_rescue_equipment",
+  medical_equipment: "medical_equipment",
+  sports_equipment: "sports_equipment",
+  other_machineries_and_equipment: "other_machineries_and_equipment",
+  motor_vehicle: "motor_vehicle",
+  other_transportation_equipment: "other_transportation_equipment",
+  other_property_plant_and_equipment: "other_property_plant_and_equipment",
+  welfare_goods_for_distribution_mdrrmf:
+    "welfare_goods_for_distribution_mdrrmf",
+  inventory_of_medical_supplies_mdrrmf: "inventory_of_medical_supplies_mdrrmf",
+  drug_and_medicine_inventory: "drug_and_medicine_inventory",
+  medical_dental_and_labaratory_supply_rhu:
+    "medical_dental_and_labaratory_supply_rhu",
 } as const;

@@ -6,16 +6,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useOtherLandPage } from "@/features/other_land/hooks/useOtherLandPage";
 import StatCard from "@/shared/components/ui/StatCard";
+import { useRoadNetworkPage } from "@/features/road_network/useRoadNetworkPage";
 
 export default function PpeSummaryPage() {
   const { stats: landStat } = useLandPage();
   const { stats: otherLandStat } = useOtherLandPage();
+  const { stats: roadNetworkStat} = useRoadNetworkPage();
   const [search, setSearch] = useState("");
 
   const navigate = useNavigate();
 
   const totalAmount =
-    landStat.totalCarryingAmount + otherLandStat.totalCarryingAmount;
+    landStat.totalCarryingAmount + otherLandStat.totalCarryingAmount + roadNetworkStat.totalCost;
 
   const columns = [
     { header: "NO", key: "id" },
@@ -44,7 +46,15 @@ export default function PpeSummaryPage() {
       book_value: "",
       per_inventory_report: otherLandStat.totalCarryingAmount,
       variance: "",
-      route: "/ppe/other-land-improvements",
+      route: "/ppe/other-land-improvement",
+    },
+    {
+      id: 3,
+      account_title: "Road Networks",
+      book_value: "",
+      per_inventory_report: roadNetworkStat.totalCost,
+      variance: "",
+      route: "/ppe/road-network",
     },
   ];
 

@@ -1,10 +1,10 @@
 import { create } from "zustand";
-import * as otherLandApi from "@/features/other_land/api/otherLand.api";
+import * as otherLandApi from "@/features/other_land/otherLand.api";
 import type {
   OtherLandActionResult,
   OtherLandInput,
   OtherLandItem,
-} from "@/features/other_land/types/otherLand.types";
+} from "@/features/other_land/otherLand.types";
 
 interface OtherLandState {
   otherLandItems: OtherLandItem[];

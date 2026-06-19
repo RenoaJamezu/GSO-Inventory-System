@@ -1,43 +1,49 @@
 import { useEffect, useState } from "react";
-import type { OtherLandItem } from "../types/otherLand.types";
-import { useOtherLandStore } from "../store/otherLandStore";
-import type { OtherLandFormData } from "../schemas/otherLand.schema";
+import type { RoadNetworkItem } from "./roadNetwork.type";
+import { useRoadNetworkStore } from "./roadNetworkStore";
+import type { RoadNetworkFormData } from "./roadNetwork.schema";
 
-export function useOtherLandPage() {
+export function useRoadNetworkPage() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [selectedOtherLand, setSelectedOtherLand] =
-    useState<OtherLandItem | null>(null);
+  const [selectedRoadNetwork, setSelectedRoadNetwork] =
+    useState<RoadNetworkItem | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [isBusy, setIsBusy] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
   const [editError, setEditError] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
 
-  const otherLandItems = useOtherLandStore((state) => state.otherLandItems);
-  const loadOtherLand = useOtherLandStore((state) => state.loadOtherLand);
-  const addOtherLand = useOtherLandStore((state) => state.addOtherLand);
-  const updateOtherLand = useOtherLandStore((state) => state.updateOtherLand);
-  const deleteOtherLand = useOtherLandStore((state) => state.deleteOtherLand);
+  const roadNetworkItems = useRoadNetworkStore(
+    (state) => state.roadNetworkItems,
+  );
+  const loadRoadNetwork = useRoadNetworkStore((state) => state.loadRoadNetwork);
+  const addRoadNetwork = useRoadNetworkStore((state) => state.addRoadNetwork);
+  const updateRoadNetwork = useRoadNetworkStore(
+    (state) => state.updateRoadNetwork,
+  );
+  const deleteRoadNetwork = useRoadNetworkStore(
+    (state) => state.deleteRoadNetwork,
+  );
 
   useEffect(() => {
     const load = async () => {
-      const result = await loadOtherLand();
+      const result = await loadRoadNetwork();
       if (!result.success) {
         setLoadError(result.error);
       }
     };
 
     load();
-  }, [loadOtherLand]);
+  }, [loadRoadNetwork]);
 
-  const otherLandCount = otherLandItems.length;
-  const totalCarryingAmount = otherLandItems.reduce(
-    (sum, item) => sum + Number(item.carrying_amount || 0),
+  const roadNetworkCount = roadNetworkItems.length;
+  const totalCost = roadNetworkItems.reduce(
+    (sum, item) => sum + Number(item.cost || 0),
     0,
   );
 
   const closeDetail = () => {
-    setSelectedOtherLand(null);
+    setSelectedRoadNetwork(null);
     setIsEditing(false);
     setIsBusy(false);
     setEditError(null);
@@ -53,8 +59,8 @@ export function useOtherLandPage() {
     setCreateError(null);
   };
 
-  const handleCreate = async (data: OtherLandFormData): Promise<boolean> => {
-    const result = await addOtherLand(data);
+  const handleCreate = async (data: RoadNetworkFormData): Promise<boolean> => {
+    const result = await addRoadNetwork(data);
     if (!result.success) {
       setCreateError(result.error);
       return false;
@@ -63,11 +69,11 @@ export function useOtherLandPage() {
     return true;
   };
 
-  const handleUpdate = async (data: OtherLandFormData): Promise<boolean> => {
-    if (!selectedOtherLand) return false;
+  const handleUpdate = async (data: RoadNetworkFormData): Promise<boolean> => {
+    if (!selectedRoadNetwork) return false;
 
     setIsBusy(true);
-    const result = await updateOtherLand(selectedOtherLand.id, data);
+    const result = await updateRoadNetwork(selectedRoadNetwork.id, data);
     setIsBusy(false);
 
     if (!result.success) {
@@ -80,16 +86,16 @@ export function useOtherLandPage() {
   };
 
   const handleDelete = async () => {
-    if (!selectedOtherLand) return;
+    if (!selectedRoadNetwork) return;
 
     const confirmed = window.confirm(
-      `Delete land record for ${selectedOtherLand.land_improvements || "this item"}?`,
+      `Delete road name record for ${selectedRoadNetwork.road_name || "this item"}?`,
     );
 
     if (!confirmed) return;
 
     setIsBusy(true);
-    const result = await deleteOtherLand(selectedOtherLand.id);
+    const result = await deleteRoadNetwork(selectedRoadNetwork.id);
     setIsBusy(false);
 
     if (result.success) {
@@ -100,19 +106,19 @@ export function useOtherLandPage() {
   };
 
   return {
-    otherLandItems,
-    stats: { otherLandCount, totalCarryingAmount },
+    roadNetworkItems,
+    stats: { roadNetworkCount, totalCost },
     loadError,
     modals: {
       isCreateOpen,
       openCreate,
       closeCreate,
       createError,
-      selectedOtherLand,
+      selectedRoadNetwork,
       isEditing,
       isBusy,
       editError,
-      setSelectedOtherLand,
+      setSelectedRoadNetwork,
       setIsEditing,
       closeDetail,
     },
