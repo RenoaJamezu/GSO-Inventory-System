@@ -58,7 +58,7 @@ export const roadNetworkModule = createPpeModule<
     addButton: "Add road network",
     addModal: "Add road network",
     editModal: "Edit road network",
-    description: "Manage road network assets and records", 
+    description: "report on the physical count of local road network", 
     publicTitle: "road network Information",
   },
   amountField: "cost",

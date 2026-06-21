@@ -74,7 +74,7 @@ export default function PublicAssetPage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl p-6">
+    <div className="mx-auto max-w-2xl p-6 capitalize">
       <h1 className="text-2xl font-bold">{config.title}</h1>
 
       <div className="mt-6 space-y-3 rounded-xl border bg-white p-5 shadow-sm">

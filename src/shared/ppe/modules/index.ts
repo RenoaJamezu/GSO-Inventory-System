@@ -1,20 +1,22 @@
 import type { PpeModule } from "../createPpeModule";
 import type { BaseAssetItem } from "../types";
-import { floodControlModule } from "./floodControl";
+
+export { pendingPpeModules } from "./pendingModules";
+
 import { landModule } from "./land";
 import { otherLandModule } from "./otherLandImprovement";
 import { roadNetworkModule } from "./roadNetwork";
-
-export { landModule } from "./land";
-export { otherLandModule } from "./otherLandImprovement";
-export { roadNetworkModule } from "./roadNetwork";
-export { pendingPpeModules } from "./pendingModules";
+import { floodControlModule } from "./floodControl";
+import { waterSupplyModule } from "./waterSupply";
+import { powerSupplyModule } from "./powerSupply";
 
 export const implementedPpeModules = [
   landModule,
   otherLandModule,
   roadNetworkModule,
   floodControlModule,
+  waterSupplyModule,
+  powerSupplyModule,
 ] as const;
 
 export type ImplementedPpeModule = (typeof implementedPpeModules)[number];
