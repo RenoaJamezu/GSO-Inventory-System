@@ -11,6 +11,7 @@ import { waterSupplyModule } from "./waterSupply";
 import { powerSupplyModule } from "./powerSupply";
 import { pPMModule } from "./pPM";
 import { buildingModule } from "./building";
+import { otherStructureModule } from "./otherStructure";
 
 export const implementedPpeModules = [
   landModule,
@@ -21,6 +22,7 @@ export const implementedPpeModules = [
   powerSupplyModule,
   pPMModule,
   buildingModule,
+  otherStructureModule,
 ] as const;
 
 export type ImplementedPpeModule = (typeof implementedPpeModules)[number];

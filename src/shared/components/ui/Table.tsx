@@ -49,7 +49,7 @@ const Table = <T extends object>({
                   {columns.map((column) => (
                     <td
                       key={String(column.key)}
-                      className="px-5 py-10 text-center text-sm text-slate-500"
+                      className="px-5 py-10 text-center text-sm text-slate-500 capitalize"
                     >
                       {(() => {
                         const cellValue = row[
