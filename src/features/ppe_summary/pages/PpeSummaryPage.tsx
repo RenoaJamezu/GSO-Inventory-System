@@ -59,7 +59,6 @@ export default function PpeSummaryPage() {
           getRowKey={(row) => row.id}
           emptyMessage="No PPE records yet."
           onRowClick={(row) => {
-            console.log(row.route);
             navigate(row.route);
           }}
         />

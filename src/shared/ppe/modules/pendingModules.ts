@@ -5,11 +5,6 @@ import type { PendingPpeModule } from "../types";
 // (copy land.ts as template) once the Supabase table is ready.
 export const pendingPpeModules: PendingPpeModule[] = [
   {
-    moduleKey: "buildings",
-    route: moduleKeyToRoute("buildings"),
-    accountTitle: "Buildings",
-  },
-  {
     moduleKey: "other_structure",
     route: moduleKeyToRoute("other_structure"),
     accountTitle: "Other Structure",
