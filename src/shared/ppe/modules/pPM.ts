@@ -1,11 +1,12 @@
+// park, plazas and monument
+
 import { z } from "zod";
 import type { BaseAssetItem } from "../types";
 import { createPpeModule } from "../createPpeModule";
 
-export const powerSupplySchema = z.object({
+export const pPMSchema = z.object({
   id: z.number().nullable().optional(),
-  infrastructure_no: z.string().nullable().optional(),
-  infrastructure_type: z.string().nullable().optional(),
+  structure_id: z.string().nullable().optional(),
   location: z.string().nullable().optional(),
   component: z.string().nullable().optional(),
   property_no: z.string().nullable().optional(),
@@ -15,11 +16,10 @@ export const powerSupplySchema = z.object({
   group_id: z.number().nullable().optional(),
 });
 
-export type PowerSupplyFormData = z.infer<typeof powerSupplySchema>;
+export type PPMFormData = z.infer<typeof pPMSchema>;
 
-export interface PowerSupplyItem extends BaseAssetItem {
-  infrastructure_no: string;
-  infrastructure_type: string;
+export interface PPMItem extends BaseAssetItem {
+  structure_id: string;
   location: string;
   component: string;
   property_no: string;
@@ -28,15 +28,14 @@ export interface PowerSupplyItem extends BaseAssetItem {
   remarks: string;
 }
 
-function mapPowerSupplyRow(row: Record<string, unknown>): PowerSupplyItem {
+function mapPPMRow(row: Record<string, unknown>): PPMItem {
   const groups = row.asset_groups as { name?: string } | null;
 
   return {
     id: Number(row.id),
     group_id: (row.group_id as number | null) ?? null,
     group_name: groups?.name ?? null,
-    infrastructure_no: String(row.infrastructure_no ?? ""),
-    infrastructure_type: String(row.infrastructure_type ?? ""),
+    structure_id: String(row.structure_id ?? ""),
     location: String(row.location ?? ""),
     component: String(row.component ?? ""),
     property_no: String(row.property_no ?? ""),
@@ -46,40 +45,27 @@ function mapPowerSupplyRow(row: Record<string, unknown>): PowerSupplyItem {
   };
 }
 
-export const powerSupplyModule = createPpeModule<
-  PowerSupplyItem,
-  PowerSupplyFormData
->({
-  moduleKey: "power_supply",
-  table: "power_supply",
-  route: "/ppe/power-supply",
-  publicSlug: "power-supply",
+export const pPMModule = createPpeModule<PPMItem, PPMFormData>({
+  moduleKey: "park_plaza_and_monument",
+  table: "park_plaza_and_monument",
+  route: "/ppe/park-plazas-and-monument",
+  publicSlug: "park-plazas-and-monument",
   labels: {
-    singular: "power supply system",
-    plural: "power supply system records",
-    summaryTitle: "power supply systems",
-    addButton: "add power supply system",
-    addModal: "add power supply system",
-    editModal: "edit power supply system",
-    description: "report on the physical count of power supply system",
-    publicTitle: "power supply system information",
+    singular: "park, plaza, and monument",
+    plural: "park, plaza, and monument records",
+    summaryTitle: "park, plaza, and monument",
+    addButton: "add data",
+    addModal: "add data",
+    editModal: "edit data",
+    description: "report on the physical count of park, plaza, and monument",
+    publicTitle: "park, plaza, and monument information",
   },
   amountField: "carrying_amount",
-  deleteConfirmField: "infrastructure_type",
-  qrLabelField: "infrastructure_type",
-  searchFields: [
-    "infrastructure_no",
-    "infrastructure_type",
-    "location",
-    "component",
-    "property_no",
-    "carrying_amount",
-    "date_acq",
-    "remarks",
-  ],
+  deleteConfirmField: "structure_id",
+  qrLabelField: "structure_id",
+  searchFields: [],
   fields: [
-    { label: "public infrastructure id no", name: "infrastructure_no" },
-    { label: "type of public infrastructure", name: "infrastructure_type" },
+    { label: "building / structure id no", name: "structure_id" },
     { label: "location", name: "location" },
     { label: "component", name: "component" },
     { label: "component property no", name: "property_no" },
@@ -87,11 +73,10 @@ export const powerSupplyModule = createPpeModule<
     { label: "date acq", name: "date_acq" },
     { label: "remarks", name: "remarks" },
   ],
-  schema: powerSupplySchema,
+  schema: pPMSchema,
   emptyForm: {
     group_id: null,
-    infrastructure_no: "",
-    infrastructure_type: "",
+    structure_id: "",
     location: "",
     component: "",
     property_no: "",
@@ -100,18 +85,16 @@ export const powerSupplyModule = createPpeModule<
     remarks: "",
   },
   tableColumns: [
-    { header: "public infrastructure id no", key: "infrastructure_no" },
-    { header: "type of public infrastructure", key: "infrastructure_type" },
+    { header: "building / structure id no", key: "structure_id" },
     { header: "location", key: "location" },
     { header: "component", key: "component" },
     { header: "component property no", key: "property_no" },
-    { header: "carrying amount", key: "carrying_amount", format: "currency"  },
+    { header: "carrying amount", key: "carrying_amount", format: "currency" },
     { header: "date acq", key: "date_acq" },
     { header: "remarks", key: "remarks" },
   ],
   publicFields: [
-    { label: "public infrastructure id no", key: "infrastructure_no" },
-    { label: "type of public infrastructure", key: "infrastructure_type" },
+    { label: "building / structure id no", key: "structure_id" },
     { label: "location", key: "location" },
     { label: "component", key: "component" },
     { label: "component property no", key: "property_no" },
@@ -123,5 +106,5 @@ export const powerSupplyModule = createPpeModule<
     { label: "date acq", key: "date_acq" },
     { label: "remarks", key: "remarks" },
   ],
-  mapRow: mapPowerSupplyRow,
+  mapRow: mapPPMRow,
 });

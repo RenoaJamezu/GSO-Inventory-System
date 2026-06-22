@@ -32,6 +32,7 @@ const WaterSupplyPage = lazy(
 const PowerSupplyPage = lazy(
   () => import("@/features/ppe/pages/PowerSupplyPage"),
 );
+const PPMModulePage = lazy(() => import("@/features/ppe/pages/PPMPage"));
 
 // NEW: public QR landing page (NO layout, NO auth)
 const PublicAssetPage = lazy(
@@ -68,6 +69,10 @@ export default function AppRoutes() {
               <Route path="flood-control" element={<FloodControlPage />} />
               <Route path="water-supply" element={<WaterSupplyPage />} />
               <Route path="power-supply" element={<PowerSupplyPage />} />
+              <Route
+                path="park-plazas-and-monument"
+                element={<PPMModulePage />}
+              />
             </Route>
           </Route>
         </Route>

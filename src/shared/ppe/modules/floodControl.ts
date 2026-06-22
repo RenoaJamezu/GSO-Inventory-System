@@ -17,7 +17,7 @@ export const floodControlSchema = z.object({
 
 export type FloodControlFormData = z.infer<typeof floodControlSchema>;
 
-export interface floodControlItem extends BaseAssetItem {
+export interface FloodControlItem extends BaseAssetItem {
   infrastructure_no: string;
   infrastructure_type: string;
   location: string;
@@ -28,7 +28,7 @@ export interface floodControlItem extends BaseAssetItem {
   remarks: string;
 }
 
-function mapFloodControlRow(row: Record<string, unknown>): floodControlItem {
+function mapFloodControlRow(row: Record<string, unknown>): FloodControlItem {
   const groups = row.asset_groups as { name?: string } | null;
 
   return {
@@ -47,7 +47,7 @@ function mapFloodControlRow(row: Record<string, unknown>): floodControlItem {
 }
 
 export const floodControlModule = createPpeModule<
-  floodControlItem,
+  FloodControlItem,
   FloodControlFormData
 >({
   moduleKey: "flood_control",
@@ -105,7 +105,7 @@ export const floodControlModule = createPpeModule<
     { header: "location", key: "location" },
     { header: "component", key: "component" },
     { header: "component property no", key: "property_no" },
-    { header: "carrying amount", key: "carrying_amount" },
+    { header: "carrying amount", key: "carrying_amount", format: "currency"  },
     { header: "date acq", key: "date_acq" },
     { header: "remarks", key: "remarks" },
   ],

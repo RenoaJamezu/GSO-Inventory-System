@@ -17,7 +17,7 @@ export const waterSupplySchema = z.object({
 
 export type WaterSupplyFormData = z.infer<typeof waterSupplySchema>;
 
-export interface waterSupplyItem extends BaseAssetItem {
+export interface WaterSupplyItem extends BaseAssetItem {
   infrastructure_no: string;
   infrastructure_type: string;
   location: string;
@@ -28,7 +28,7 @@ export interface waterSupplyItem extends BaseAssetItem {
   remarks: string;
 }
 
-function mapWaterSupplyRow(row: Record<string, unknown>): waterSupplyItem {
+function mapWaterSupplyRow(row: Record<string, unknown>): WaterSupplyItem {
   const groups = row.asset_groups as { name?: string } | null;
 
   return {
@@ -47,7 +47,7 @@ function mapWaterSupplyRow(row: Record<string, unknown>): waterSupplyItem {
 }
 
 export const waterSupplyModule = createPpeModule<
-  waterSupplyItem,
+  WaterSupplyItem,
   WaterSupplyFormData
 >({
   moduleKey: "water_supply",
@@ -58,9 +58,9 @@ export const waterSupplyModule = createPpeModule<
     singular: "water supply system",
     plural: "water supply system records",
     summaryTitle: "water supply systems",
-    addButton: "add water supply system",
-    addModal: "add water supply system",
-    editModal: "edit water supply system",
+    addButton: "add data",
+    addModal: "add data",
+    editModal: "edit data",
     description: "report on the physical count of water supply system", 
     publicTitle: "water supply system information",
   },
@@ -105,7 +105,7 @@ export const waterSupplyModule = createPpeModule<
     { header: "location", key: "location" },
     { header: "component", key: "component" },
     { header: "component property no", key: "property_no" },
-    { header: "carrying amount", key: "carrying_amount" },
+    { header: "carrying amount", key: "carrying_amount", format: "currency"  },
     { header: "date acq", key: "date_acq" },
     { header: "remarks", key: "remarks" },
   ],

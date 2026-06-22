@@ -9,7 +9,7 @@ export const roadNetworkSchema = z.object({
   particulars: z.string().trim().optional(),
   description: z.string().trim().optional(),
   cost: z.number().min(0, "Cost amount must be 0 or greater"),
-  acq_date: z.string().trim().optional(),
+  date_acq: z.string().trim().optional(),
   remarks: z.string().trim().optional(),
   group_id: z.number().nullable().optional(),
 });
@@ -22,7 +22,7 @@ export interface RoadNetworkItem extends BaseAssetItem {
   particulars: string;
   description: string;
   cost: number;
-  acq_date: string;
+  date_acq: string;
   remarks: string;
 }
 
@@ -38,7 +38,7 @@ function mapRoadNetworkRow(row: Record<string, unknown>): RoadNetworkItem {
     particulars: String(row.particulars ?? ""),
     description: String(row.description ?? ""),
     cost: Number(row.cost ?? 0),
-    acq_date: String(row.acq_date ?? ""),
+    date_acq: String(row.date_acq ?? ""),
     remarks: String(row.remarks ?? ""),
   };
 }
@@ -55,9 +55,9 @@ export const roadNetworkModule = createPpeModule<
     singular: "road network",
     plural: "road network Records",
     summaryTitle: "road networks",
-    addButton: "Add road network",
-    addModal: "Add road network",
-    editModal: "Edit road network",
+    addButton: "add data",
+    addModal: "add data",
+    editModal: "edit data",
     description: "report on the physical count of local road network", 
     publicTitle: "road network Information",
   },
@@ -70,7 +70,7 @@ export const roadNetworkModule = createPpeModule<
     "particulars",
     "description",
     "cost",
-    "acq_date",
+    "date_acq",
     "remarks",
   ],
   fields: [
@@ -79,7 +79,7 @@ export const roadNetworkModule = createPpeModule<
     { label: "particulars", name: "particulars" },
     { label: "description", name: "description", textarea: true },
     { label: "cost", name: "cost", type: "number" },
-    { label: "acq date", name: "acq_date" },
+    { label: "date acq", name: "date_acq" },
     { label: "remarks", name: "remarks", textarea: true },
   ],
   schema: roadNetworkSchema,
@@ -90,7 +90,7 @@ export const roadNetworkModule = createPpeModule<
     particulars: "",
     description: "",
     cost: 0,
-    acq_date: "",
+    date_acq: "",
     remarks: "",
   },
   tableColumns: [
@@ -99,7 +99,7 @@ export const roadNetworkModule = createPpeModule<
     { header: "particulars", key: "particulars" },
     { header: "description", key: "description" },
     { header: "cost", key: "cost", format: "currency" },
-    { header: "acq date", key: "acq_date" },
+    { header: "date acq", key: "date_acq" },
     { header: "remarks", key: "remarks" },
   ],
   publicFields: [
@@ -112,7 +112,7 @@ export const roadNetworkModule = createPpeModule<
       key: "cost",
       format: (value) => Number(value ?? 0).toLocaleString(),
     },
-    { label: "acq date", key: "acq_date" },
+    { label: "date acq", key: "date_acq" },
     { label: "remarks", key: "remarks" },
   ],
   mapRow: mapRoadNetworkRow,
