@@ -34,7 +34,7 @@ export default function PpeSummaryPage() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="flex h-screen flex-col gap-6 overflow-hidden">
       <PageHeader
         eyebrow="property plant and equipments"
         title="PPE Summary workspace"
@@ -52,7 +52,7 @@ export default function PpeSummaryPage() {
         placeholder="Search by account title..."
       />
 
-      <div className="simple-scrollbar flex-1 overflow-y-auto">
+      <div className="min-h-0 flex-1">
         <Table<PpeSummaryRow>
           columns={columns}
           data={filteredRows}

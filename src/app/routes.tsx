@@ -58,15 +58,17 @@ export default function AppRoutes() {
             <Route path="/inventory" element={<InventoryPage />} />
             <Route path="/ppe-summary" element={<PpeSummaryPage />} />
 
-            <Route path="/ppe/land" element={<LandPage />} />
-            <Route
-              path="/ppe/other-land-improvement"
-              element={<OtherLandPage />}
-            />
-            <Route path="/ppe/road-network" element={<RoadNetworkPage />} />
-            <Route path="/ppe/flood-control" element={<FloodControlPage />} />
-            <Route path="/ppe/water-supply" element={<WaterSupplyPage />} />
-            <Route path="/ppe/power-supply" element={<PowerSupplyPage />} />
+            <Route path="/ppe">
+              <Route path="land" element={<LandPage />} />
+              <Route
+                path="other-land-improvement"
+                element={<OtherLandPage />}
+              />
+              <Route path="road-network" element={<RoadNetworkPage />} />
+              <Route path="flood-control" element={<FloodControlPage />} />
+              <Route path="water-supply" element={<WaterSupplyPage />} />
+              <Route path="power-supply" element={<PowerSupplyPage />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
