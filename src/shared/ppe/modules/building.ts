@@ -11,7 +11,7 @@ export const buildingSchema = z.object({
   carrying_amount: z.number().nullable().optional(),
   condition: z.string().nullable().optional(),
   date_acq: z.string().nullable().optional(),
-  group_id: z.string().nullable().optional(),
+  group_id: z.number().nullable().optional(),
 });
 
 export type BuildingFormData = z.infer<typeof buildingSchema>;
