@@ -17,6 +17,19 @@ import { marketModule } from "./market";
 import { otherInfrastructureAssetModule } from "./otherInfrastructureAsset";
 import { cPIAModule } from "./cPIA";
 import { cPBOSModule } from "./cPBOS";
+import { officeEquipmentModule } from "./officeEquipment";
+import { furnitureFixtureModule } from "./furnitureFixture";
+import { iTEModule } from "./iTE";
+import { aFEModule } from "./aFE";
+import { communicationEquipmentModule } from "./communicationEquipment";
+import { cHEModule } from "./cHE";
+import { dREModule } from "./dRE";
+import { medicalEquipmentModule } from "./medicalEquipment";
+import { sportsEquipmentModule } from "./sportsEquipment";
+import { oMEModule } from "./oME";
+import { motorVehicleModule } from "./motorVehicle";
+import { oTEModule } from "./oTE";
+import { oPPEModule } from "./oPPE";
 
 export const implementedPpeModules = [
   landModule,
@@ -33,6 +46,19 @@ export const implementedPpeModules = [
   otherInfrastructureAssetModule,
   cPIAModule,
   cPBOSModule,
+  officeEquipmentModule,
+  furnitureFixtureModule,
+  iTEModule,
+  aFEModule,
+  communicationEquipmentModule,
+  cHEModule,
+  dREModule,
+  medicalEquipmentModule,
+  sportsEquipmentModule,
+  oMEModule,
+  motorVehicleModule,
+  oTEModule,
+  oPPEModule,
 ] as const;
 
 export type ImplementedPpeModule = (typeof implementedPpeModules)[number];

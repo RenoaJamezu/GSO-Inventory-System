@@ -5,46 +5,6 @@ import type { PendingPpeModule } from "../types";
 // (copy land.ts as template) once the Supabase table is ready.
 export const pendingPpeModules: PendingPpeModule[] = [
   {
-    moduleKey: "office_equipment",
-    route: moduleKeyToRoute("office_equipment"),
-    accountTitle: "Office Equipment",
-  },
-  {
-    moduleKey: "furniture_and_fixtures",
-    route: moduleKeyToRoute("furniture_and_fixtures"),
-    accountTitle: "Furniture and Fixtures",
-  },
-  {
-    moduleKey: "information_technology_equipment",
-    route: moduleKeyToRoute("information_technology_equipment"),
-    accountTitle: "Information Technology Equipment",
-  },
-  {
-    moduleKey: "agricultural_and_forestry_equipment",
-    route: moduleKeyToRoute("agricultural_and_forestry_equipment"),
-    accountTitle: "Agricultural and Forestry Equipment",
-  },
-  {
-    moduleKey: "communication_equipment",
-    route: moduleKeyToRoute("communication_equipment"),
-    accountTitle: "Communication Equipment",
-  },
-  {
-    moduleKey: "construction_and_heavy_equipment",
-    route: moduleKeyToRoute("construction_and_heavy_equipment"),
-    accountTitle: "Construction and Heavy Equipment",
-  },
-  {
-    moduleKey: "disaster_and_rescue_equipment",
-    route: moduleKeyToRoute("disaster_and_rescue_equipment"),
-    accountTitle: "Disaster and Rescue Equipment",
-  },
-  {
-    moduleKey: "medical_equipment",
-    route: moduleKeyToRoute("medical_equipment"),
-    accountTitle: "Medical Equipment",
-  },
-  {
     moduleKey: "sports_equipment",
     route: moduleKeyToRoute("sports_equipment"),
     accountTitle: "Sports Equipment",
