@@ -39,6 +39,12 @@ export function getImplementedModuleByKey(moduleKey: string) {
   ) as PpeModule<BaseAssetItem, Record<string, unknown>> | undefined;
 }
 
+export function getImplementedModuleBySlug(slug: string) {
+  return implementedPpeModules.find(
+    (module) => module.publicSlug === slug,
+  ) as PpeModule<BaseAssetItem, Record<string, unknown>> | undefined;
+}
+
 // To add a new PPE module:
 // 1. Create Supabase table (with group_id FK to asset_groups, deleted_at for soft delete)
 // 2. Copy src/shared/ppe/modules/land.ts → yourModule.ts

@@ -18,22 +18,9 @@ const InventoryPage = lazy(
 const PpeSummaryPage = lazy(
   () => import("@/features/ppe_summary/pages/PpeSummaryPage"),
 );
-const LandPage = lazy(() => import("@/features/ppe/pages/LandPage"));
-const OtherLandPage = lazy(() => import("@/features/ppe/pages/OtherLandPage"));
-const RoadNetworkPage = lazy(
-  () => import("@/features/ppe/pages/RoadNetworkPage"),
-);
-const FloodControlPage = lazy(
-  () => import("@/features/ppe/pages/FloodControlPage"),
-);
-const WaterSupplyPage = lazy(
-  () => import("@/features/ppe/pages/WaterSupplyPage"),
-);
-const PowerSupplyPage = lazy(
-  () => import("@/features/ppe/pages/PowerSupplyPage"),
-);
-const PPMPage = lazy(() => import("@/features/ppe/pages/PPMPage"));
-const BuildingPage = lazy(() => import("@/features/ppe/pages/BuildingPage"));
+
+// PPE: Account Titles
+const PPEModulePage = lazy(() => import("@/features/ppe/pages/PPEModulePage"));
 
 // NEW: public QR landing page (NO layout, NO auth)
 const PublicAssetPage = lazy(
@@ -60,20 +47,8 @@ export default function AppRoutes() {
             <Route path="/inventory" element={<InventoryPage />} />
             <Route path="/ppe-summary" element={<PpeSummaryPage />} />
 
-            <Route path="/ppe">
-              <Route path="land" element={<LandPage />} />
-              <Route
-                path="other-land-improvement"
-                element={<OtherLandPage />}
-              />
-              <Route path="road-network" element={<RoadNetworkPage />} />
-              <Route path="flood-control" element={<FloodControlPage />} />
-              <Route path="water-supply" element={<WaterSupplyPage />} />
-              <Route path="power-supply" element={<PowerSupplyPage />} />
-              <Route path="park-plazas-and-monument" element={<PPMPage />} />
-              <Route path="building" element={<BuildingPage />} />
-              {/* <Route path="" element={} /> */}
-            </Route>
+            {/* PPE Account Titles */}
+            <Route path="/ppe/:slug" element={<PPEModulePage />} />
           </Route>
         </Route>
       </Routes>
