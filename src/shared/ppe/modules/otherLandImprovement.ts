@@ -91,8 +91,8 @@ export const otherLandModule = createPpeModule<OtherLandItem, OtherLandFormData>
     remarks: "",
   },
   tableColumns: [
-    { header: "land", key: "land" },
-    { header: "land improvements", key: "land_improvements" },
+    { header: "land", key: "land", group: "classification" },
+    { header: "land improvements", key: "land_improvements", group: "classification" },
     { header: "location", key: "location" },
     { header: "description", key: "description" },
     { header: "carrying amount", key: "carrying_amount", format: "currency" },

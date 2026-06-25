@@ -20,6 +20,7 @@ export type PublicField = {
 export type TableColumnConfig<T extends BaseAssetItem> = {
   header: string;
   key: keyof T;
+  group?: string;
   format?: "currency";
 };
 

@@ -36,6 +36,7 @@ export default function AssetPage<
       (column) => ({
         header: column.header,
         key: column.key,
+        group: column.group,
         render:
           column.format === "currency"
             ? (value: TItem[keyof TItem]) => Number(value ?? 0).toLocaleString()
