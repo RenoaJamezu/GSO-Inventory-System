@@ -12,6 +12,11 @@ import { powerSupplyModule } from "./powerSupply";
 import { pPMModule } from "./pPM";
 import { buildingModule } from "./building";
 import { otherStructureModule } from "./otherStructure";
+import { hHCModule } from "./hHC";
+import { marketModule } from "./market";
+import { otherInfrastructureAssetModule } from "./otherInfrastructureAsset";
+import { cPIAModule } from "./cPIA";
+import { cPBOSModule } from "./cPBOS";
 
 export const implementedPpeModules = [
   landModule,
@@ -23,6 +28,11 @@ export const implementedPpeModules = [
   pPMModule,
   buildingModule,
   otherStructureModule,
+  hHCModule,
+  marketModule,
+  otherInfrastructureAssetModule,
+  cPIAModule,
+  cPBOSModule,
 ] as const;
 
 export type ImplementedPpeModule = (typeof implementedPpeModules)[number];
@@ -50,5 +60,5 @@ export function getImplementedModuleBySlug(slug: string) {
 // 2. Copy src/shared/ppe/modules/land.ts → yourModule.ts
 // 3. Define schema, fields, tableColumns, publicFields, and mapRow for your columns
 // 4. Import and append your module to implementedPpeModules below
-// 5. Add a lazy route in src/app/routes.tsx pointing to a thin page wrapper
+// 5. Add a lazy route in src/app/routes.tsx pointing to a thin page wrapper -> no need
 // 6. moduleKey must match GROUP_MODULE_MAP in src/shared/config/groupModuleMap.ts

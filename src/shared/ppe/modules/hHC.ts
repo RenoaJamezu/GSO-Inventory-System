@@ -1,10 +1,10 @@
-// park, plazas and monument
+// hospital and health centers
 
 import { z } from "zod";
 import type { BaseAssetItem } from "../types";
 import { createPpeModule } from "../createPpeModule";
 
-export const otherStructureSchema = z.object({
+export const hHCSchema = z.object({
   id: z.number().nullable().optional(),
   structure_id: z.string().nullable().optional(),
   location: z.string().nullable().optional(),
@@ -16,9 +16,9 @@ export const otherStructureSchema = z.object({
   group_id: z.number().nullable().optional(),
 });
 
-export type PPMFormData = z.infer<typeof otherStructureSchema>;
+export type HHCFormData = z.infer<typeof hHCSchema>;
 
-export interface OtherStructureItem extends BaseAssetItem {
+export interface HHCItem extends BaseAssetItem {
   structure_id: string;
   location: string;
   building_no: string;
@@ -28,7 +28,7 @@ export interface OtherStructureItem extends BaseAssetItem {
   remarks: string;
 }
 
-function mapOtherStructure(row: Record<string, unknown>): OtherStructureItem {
+function mapHHCRow(row: Record<string, unknown>): HHCItem {
   const groups = row.asset_groups as { name?: string } | null;
 
   return {
@@ -45,23 +45,20 @@ function mapOtherStructure(row: Record<string, unknown>): OtherStructureItem {
   };
 }
 
-export const otherStructureModule = createPpeModule<
-  OtherStructureItem,
-  PPMFormData
->({
-  moduleKey: "other_structure",
-  table: "other_structure",
-  route: "/ppe/other-structure",
-  publicSlug: "other-structure",
+export const hHCModule = createPpeModule<HHCItem, HHCFormData>({
+  moduleKey: "hospital_and_health_center",
+  table: "hospital_and_health_center",
+  route: "/ppe/hospita-and-health-center",
+  publicSlug: "hospita-and-health-center",
   labels: {
-    singular: "other structure",
-    plural: "schedule of other structures",
-    summaryTitle: "other structure",
+    singular: "hospital and health center",
+    plural: "schedule of hospital and health center",
+    summaryTitle: "hospital and health center",
     addButton: "add data",
     addModal: "add data",
     editModal: "edit data",
-    description: "report on the physical count of buildings and structure",
-    publicTitle: "other structure information",
+    description: "report on the physical count of buildings and structures",
+    publicTitle: "hospital and health center information",
   },
   amountField: "carrying_amount",
   deleteConfirmField: "structure_id",
@@ -81,15 +78,14 @@ export const otherStructureModule = createPpeModule<
     { label: "building no", name: "building_no" },
     { label: "component property no", name: "property_no" },
     { label: "carrying amount", name: "carrying_amount", type: "number" },
-    { label: "date acq", name: "date_acq" },
+    { label: "date", name: "date_acq" },
     { label: "remarks", name: "remarks" },
   ],
-  schema: otherStructureSchema,
+  schema: hHCSchema,
   emptyForm: {
     group_id: null,
     structure_id: "",
     location: "",
-    building_no: "",
     property_no: "",
     carrying_amount: 0,
     date_acq: "",
@@ -101,7 +97,7 @@ export const otherStructureModule = createPpeModule<
     { header: "building no", key: "building_no" },
     { header: "component property no", key: "property_no" },
     { header: "carrying amount", key: "carrying_amount", format: "currency" },
-    { header: "date acq", key: "date_acq" },
+    { header: "date", key: "date_acq" },
     { header: "remarks", key: "remarks" },
   ],
   publicFields: [
@@ -114,8 +110,8 @@ export const otherStructureModule = createPpeModule<
       key: "carrying_amount",
       format: (value) => Number(value ?? 0).toLocaleString(),
     },
-    { label: "date acq", key: "date_acq" },
+    { label: "date", key: "date_acq" },
     { label: "remarks", key: "remarks" },
   ],
-  mapRow: mapOtherStructure,
+  mapRow: mapHHCRow,
 });

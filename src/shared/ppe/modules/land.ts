@@ -53,7 +53,7 @@ export const landModule = createPpeModule<LandItem, LandFormData>({
   publicSlug: "land",
   labels: {
     singular: "land",
-    plural: "land records",
+    plural: "schedule of Land",
     summaryTitle: "land",
     addButton: "add data",
     addModal: "add data",

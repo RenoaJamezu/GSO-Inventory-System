@@ -53,7 +53,7 @@ export const roadNetworkModule = createPpeModule<
   publicSlug: "road-network",
   labels: {
     singular: "road network",
-    plural: "road network Records",
+    plural: "schedule of road networks",
     summaryTitle: "road networks",
     addButton: "add data",
     addModal: "add data",

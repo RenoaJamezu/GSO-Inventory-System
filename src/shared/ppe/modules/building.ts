@@ -50,12 +50,12 @@ export const buildingModule = createPpeModule<BuildingItem, BuildingFormData>({
   publicSlug: "building",
   labels: {
     singular: "building",
-    plural: "building records",
+    plural: "schedule of buildings",
     summaryTitle: "building",
     addButton: "add data",
     addModal: "add data",
     editModal: "edit data",
-    description: "report on the physical count of building and structures",
+    description: "report on the physical count of buildings and structures",
     publicTitle: "building information",
   },
   amountField: "carrying_amount",
@@ -84,6 +84,7 @@ export const buildingModule = createPpeModule<BuildingItem, BuildingFormData>({
     group_id: null,
     structure_id: "",
     location: "",
+    building_no: "",
     property_no: "",
     carrying_amount: 0,
     condition: "",
@@ -92,6 +93,7 @@ export const buildingModule = createPpeModule<BuildingItem, BuildingFormData>({
   tableColumns: [
     { header: "building / structure id no", key: "structure_id" },
     { header: "location", key: "location" },
+    { header: "building no", key: "building_no" },
     { header: "component property no", key: "property_no" },
     { header: "carrying amount", key: "carrying_amount", format: "currency" },
     { header: "condition", key: "condition" },
@@ -100,6 +102,7 @@ export const buildingModule = createPpeModule<BuildingItem, BuildingFormData>({
   publicFields: [
     { label: "building / structure id no", key: "structure_id" },
     { label: "location", key: "location" },
+    { label: "building no", key: "building_no" },
     { label: "component property no", key: "property_no" },
     {
       label: "carrying amount",

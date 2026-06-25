@@ -56,7 +56,7 @@ export const powerSupplyModule = createPpeModule<
   publicSlug: "power-supply",
   labels: {
     singular: "power supply system",
-    plural: "power supply system records",
+    plural: "schedule of power supply system",
     summaryTitle: "power supply systems",
     addButton: "add power supply system",
     addModal: "add power supply system",

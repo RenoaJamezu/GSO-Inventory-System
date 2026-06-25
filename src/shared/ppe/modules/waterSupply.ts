@@ -56,7 +56,7 @@ export const waterSupplyModule = createPpeModule<
   publicSlug: "water-supply",
   labels: {
     singular: "water supply system",
-    plural: "water supply system records",
+    plural: "schedule of water supply system",
     summaryTitle: "water supply systems",
     addButton: "add data",
     addModal: "add data",
