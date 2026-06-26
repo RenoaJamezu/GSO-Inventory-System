@@ -1,7 +1,13 @@
 import { supabase } from "@/shared/lib/supabase";
 import type { BaseAssetItem } from "./types";
 
-const GROUP_SELECT = `*, asset_groups ( id, name )`;
+const GROUP_SELECT = `
+  *,
+  asset_groups (
+    id,
+    name
+  )
+`;
 
 export function createAssetApi<
   TItem extends BaseAssetItem,
@@ -17,23 +23,32 @@ export function createAssetApi<
         .select(GROUP_SELECT)
         .is("deleted_at", null);
 
-      if (error) throw new Error(error.message);
+      if (error) {
+        throw new Error(error.message);
+      }
 
       return (data ?? []).map((row) =>
         mapRow(row as Record<string, unknown>),
       );
     },
 
-    async create(item: TInput): Promise<TItem> {
+    async createMany(items: TInput[]): Promise<TItem[]> {
+      if (items.length === 0) {
+        return [];
+      }
+
       const { data, error } = await supabase
         .from(table)
-        .insert(item as Record<string, unknown>)
-        .select(GROUP_SELECT)
-        .single();
+        .insert(items as Record<string, unknown>[])
+        .select(GROUP_SELECT);
 
-      if (error) throw new Error(error.message);
+      if (error) {
+        throw new Error(error.message);
+      }
 
-      return mapRow(data as Record<string, unknown>);
+      return (data ?? []).map((row) =>
+        mapRow(row as Record<string, unknown>),
+      );
     },
 
     async update(id: number, item: TInput): Promise<TItem> {
@@ -44,7 +59,9 @@ export function createAssetApi<
         .select(GROUP_SELECT)
         .single();
 
-      if (error) throw new Error(error.message);
+      if (error) {
+        throw new Error(error.message);
+      }
 
       return mapRow(data as Record<string, unknown>);
     },
@@ -52,10 +69,14 @@ export function createAssetApi<
     async remove(id: number): Promise<void> {
       const { error } = await supabase
         .from(table)
-        .update({ deleted_at: new Date().toISOString() })
+        .update({
+          deleted_at: new Date().toISOString(),
+        })
         .eq("id", id);
 
-      if (error) throw new Error(error.message);
+      if (error) {
+        throw new Error(error.message);
+      }
     },
   };
 }

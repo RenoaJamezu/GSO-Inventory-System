@@ -16,13 +16,14 @@ export function useAssetPage<
 
   const items = module.useStore((state) => state.items);
   const load = module.useStore((state) => state.load);
-  const add = module.useStore((state) => state.add);
+  const addMany = module.useStore((state) => state.addMany);
   const update = module.useStore((state) => state.update);
   const remove = module.useStore((state) => state.remove);
 
   useEffect(() => {
     const runLoad = async () => {
       const result = await load();
+
       if (!result.success) {
         setLoadError(result.error);
       }
@@ -32,9 +33,9 @@ export function useAssetPage<
   }, [load]);
 
   const itemCount = items.length;
+
   const totalAmount = items.reduce(
-    (sum: number, item: TItem) =>
-      sum + Number(item[module.amountField] ?? 0),
+    (sum: number, item: TItem) => sum + Number(item[module.amountField] ?? 0),
     0,
   );
 
@@ -55,21 +56,36 @@ export function useAssetPage<
     setCreateError(null);
   };
 
-  const handleCreate = async (data: TFormData): Promise<boolean> => {
-    const result = await add(data);
+  const handleCreate = async (rows: TFormData[]): Promise<boolean> => {
+    if (rows.length === 0) {
+      return false;
+    }
+
+    setIsBusy(true);
+
+    const result = await addMany(rows);
+
+    setIsBusy(false);
+
     if (!result.success) {
       setCreateError(result.error);
       return false;
     }
+
     setCreateError(null);
+
     return true;
   };
 
   const handleUpdate = async (data: TFormData): Promise<boolean> => {
-    if (!selectedItem) return false;
+    if (!selectedItem) {
+      return false;
+    }
 
     setIsBusy(true);
+
     const result = await update(selectedItem.id, data);
+
     setIsBusy(false);
 
     if (!result.success) {
@@ -78,21 +94,31 @@ export function useAssetPage<
     }
 
     closeDetail();
+
     return true;
   };
 
   const handleDelete = async () => {
-    if (!selectedItem) return;
+    if (!selectedItem) {
+      return;
+    }
 
-    const label = String(selectedItem[module.deleteConfirmField] || "this item");
+    const label = String(
+      selectedItem[module.deleteConfirmField] || "this item",
+    );
+
     const confirmed = window.confirm(
       `Delete ${module.labels.singular.toLowerCase()} record for ${label}?`,
     );
 
-    if (!confirmed) return;
+    if (!confirmed) {
+      return;
+    }
 
     setIsBusy(true);
+
     const result = await remove(selectedItem.id);
+
     setIsBusy(false);
 
     if (result.success) {
@@ -104,21 +130,30 @@ export function useAssetPage<
 
   return {
     items,
-    stats: { itemCount, totalAmount },
+
+    stats: {
+      itemCount,
+      totalAmount,
+    },
+
     loadError,
+
     modals: {
       isCreateOpen,
       openCreate,
       closeCreate,
       createError,
+
       selectedItem,
       isEditing,
       isBusy,
       editError,
+
       setSelectedItem,
       setIsEditing,
       closeDetail,
     },
+
     handlers: {
       handleCreate,
       handleUpdate,

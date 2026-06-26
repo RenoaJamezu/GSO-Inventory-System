@@ -6,15 +6,8 @@ export default function DashboardPage() {
   const { totalRecords } = usePpeSummary();
 
   const features = [
-    { key: 1, detail: "Bulk add data for each account title" },
-    { key: 2, detail: "Bulk qr download for each account title" },
-    { key: 3, detail: "Improve public view for each information/inventory" },
-    {
-      key: 4,
-      detail:
-        "Field in the add data the amount must auto add comma if it reach thousands",
-    },
-    { key: 4, detail: "Drag and drop excel to auto import" },
+    { key: 1, detail: "Bulk qr download for each account title" },
+    { key: 2, detail: "Improve public view for each information/inventory" },
   ];
   return (
     <section className="grid gap-6 lg:grid-cols-[1.6fr_0.9fr]">
@@ -43,8 +36,8 @@ export default function DashboardPage() {
         </h2>
 
         <div className="mt-8 space-y-3 text-sm text-sky-100/90">
-          {features.map((feature) => (
-            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+          {features.map((feature, key) => (
+            <div key={key} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
               {feature.detail}
             </div>
           ))}

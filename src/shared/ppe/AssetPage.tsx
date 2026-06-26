@@ -139,8 +139,8 @@ export default function AssetPage<
         <AssetForm
           module={module}
           onClose={modals.closeCreate}
-          onSubmit={handlers.handleCreate}
           serverError={modals.createError}
+          onSubmit={async (rows) => handlers.handleCreate(rows as TFormData[])}
         />
       </Modal>
 
@@ -155,8 +155,8 @@ export default function AssetPage<
             initialData={modals.selectedItem as unknown as TFormData}
             onClose={modals.closeDetail}
             submitLabel="Save Changes"
-            onSubmit={handlers.handleUpdate}
             serverError={modals.editError}
+            onSubmit={async (row) => handlers.handleUpdate(row as TFormData)}
           />
         )}
       </Modal>

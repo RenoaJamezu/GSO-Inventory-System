@@ -11,8 +11,11 @@ type AssetStoreHook<
   StoreApi<{
     items: TItem[];
     load: () => Promise<ActionResult>;
-    add: (item: TInput) => Promise<ActionResult<TItem>>;
+
+    addMany: (items: TInput[]) => Promise<ActionResult<TItem[]>>;
+
     update: (id: number, item: TInput) => Promise<ActionResult<TItem>>;
+
     remove: (id: number) => Promise<ActionResult>;
   }>
 >;
@@ -34,6 +37,7 @@ export function createPpeModule<
     definition.table,
     definition.mapRow,
   );
+
   const useStore = createAssetStore<TItem, TFormData>(
     api,
     definition.labels.singular,
