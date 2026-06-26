@@ -5,31 +5,6 @@ import type { PendingPpeModule } from "../types";
 // (copy land.ts as template) once the Supabase table is ready.
 export const pendingPpeModules: PendingPpeModule[] = [
   {
-    moduleKey: "sports_equipment",
-    route: moduleKeyToRoute("sports_equipment"),
-    accountTitle: "Sports Equipment",
-  },
-  {
-    moduleKey: "other_machineries_and_equipment",
-    route: moduleKeyToRoute("other_machineries_and_equipment"),
-    accountTitle: "Other Machineries and Equipment",
-  },
-  {
-    moduleKey: "motor_vehicle",
-    route: moduleKeyToRoute("motor_vehicle"),
-    accountTitle: "Motor Vehicle",
-  },
-  {
-    moduleKey: "other_transportation_equipment",
-    route: moduleKeyToRoute("other_transportation_equipment"),
-    accountTitle: "Other Transportation Equipment",
-  },
-  {
-    moduleKey: "other_property_plant_and_equipment",
-    route: moduleKeyToRoute("other_property_plant_and_equipment"),
-    accountTitle: "Other Property, Plant and Equipment",
-  },
-  {
     moduleKey: "welfare_goods_for_distribution_mdrrmf",
     route: moduleKeyToRoute("welfare_goods_for_distribution_mdrrmf"),
     accountTitle: "Welfare Goods for Distribution (MDRRMF)",
