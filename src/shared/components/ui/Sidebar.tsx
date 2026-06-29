@@ -59,17 +59,17 @@ export default function Sidebar() {
             <span className="relative block h-4 w-5">
               <span
                 className={`absolute left-0 top-0 h-0.5 w-5 rounded-full bg-current transition ${
-                  mobileMenuOpen ? "translate-y-[7px] rotate-45" : ""
+                  mobileMenuOpen ? "translate-y-1.75 rotate-45" : ""
                 }`}
               />
               <span
-                className={`absolute left-0 top-[7px] h-0.5 w-5 rounded-full bg-current transition ${
+                className={`absolute left-0 top-1.75 h-0.5 w-5 rounded-full bg-current transition ${
                   mobileMenuOpen ? "opacity-0" : ""
                 }`}
               />
               <span
-                className={`absolute left-0 top-[14px] h-0.5 w-5 rounded-full bg-current transition ${
-                  mobileMenuOpen ? "-translate-y-[7px] -rotate-45" : ""
+                className={`absolute left-0 top-3.5 h-0.5 w-5 rounded-full bg-current transition ${
+                  mobileMenuOpen ? "-translate-y-1.75 -rotate-45" : ""
                 }`}
               />
             </span>
