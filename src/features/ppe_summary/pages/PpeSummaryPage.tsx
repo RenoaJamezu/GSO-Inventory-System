@@ -34,14 +34,14 @@ export default function PpeSummaryPage() {
   ];
 
   return (
-    <div className="flex h-screen flex-col gap-6 overflow-hidden">
+    <div className="flex h-full min-h-0 flex-col gap-4 overflow-hidden sm:gap-6">
       <PageHeader
         eyebrow="property plant and equipments"
         title="PPE Summary workspace"
         description="View the summary of PPE records"
       />
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 grid-cols-2">
         <StatCard label="Total Account Title" value={summaryRows.length} />
         <StatCard label="Total Amount" value={totalAmount.toLocaleString()} />
       </div>
@@ -52,7 +52,7 @@ export default function PpeSummaryPage() {
         placeholder="Search by account title..."
       />
 
-      <div className="min-h-0 flex-1">
+      <div className="min-h-72 flex-1 sm:min-h-0">
         <Table<PpeSummaryRow>
           columns={columns}
           data={filteredRows}

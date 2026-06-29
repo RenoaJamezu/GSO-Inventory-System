@@ -89,7 +89,7 @@ export default function AssetPage<
   }, [module, modals, handlers]);
 
   return (
-    <div className="flex h-screen flex-col gap-6 overflow-hidden">
+    <div className="flex h-full min-h-0 flex-col gap-4 overflow-hidden sm:gap-6">
       <PageHeader
         eyebrow="ppe inventory"
         title={module.labels.plural}
@@ -111,7 +111,7 @@ export default function AssetPage<
         </div>
       )}
 
-      <div className="grid gap-4 sm:grid-cols-2 capitalize">
+      <div className="grid gap-4 grid-cols-2 capitalize">
         <StatCard label="total records" value={stats.itemCount} />
         <StatCard
           label="total amount"
@@ -121,7 +121,7 @@ export default function AssetPage<
 
       <SearchInput value={search} onChange={setSearch} />
 
-      <div className="min-h-0 flex-1">
+      <div className="min-h-72 flex-1 sm:min-h-0">
         <GroupedTable<TItem>
           columns={columns}
           data={filtered}

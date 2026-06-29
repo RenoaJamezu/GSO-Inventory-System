@@ -171,7 +171,7 @@ export default function GroupedTable<T extends object>({
                 <tr key={`group-${groupName}`}>
                   <td
                     colSpan={columns.length}
-                    className="bg-blue-100/70 px-5 py-4 text-sm font-bold uppercase tracking-wider text-black"
+                    className="bg-blue-100/70 px-5 py-4 text-sm font-bold text-center uppercase tracking-wider text-black"
                   >
                     {groupName}
                   </td>
