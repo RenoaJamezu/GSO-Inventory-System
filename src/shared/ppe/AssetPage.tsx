@@ -97,7 +97,7 @@ export default function AssetPage<
         action={
           <button
             onClick={modals.openCreate}
-            className="flex items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-white capitalize"
+            className="flex items-center gap-2 rounded-xl bg-sky-600 text-sm sm:text-base px-4 py-2 text-white capitalize"
           >
             <IoIosAddCircleOutline />
             {module.labels.addButton}
